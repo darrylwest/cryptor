@@ -13,14 +13,12 @@
 #define SERVER_PRIVATE_KEY_FILE "./key.pem"
 
 using namespace httplib;
-using namespace std;
 
-string dump_headers(const Headers &headers) {
-    string s;
+std::string dump_headers(const Headers &headers) {
+    std::string s;
     char buf[BUFSIZ];
 
-    for (const auto &x : headers)
-    {
+    for (const auto &x : headers) {
         snprintf(buf, sizeof(buf), "%s: %s\n", x.first.c_str(), x.second.c_str());
         s += buf;
     }
@@ -28,8 +26,8 @@ string dump_headers(const Headers &headers) {
     return s;
 }
 
-string dump_multipart_files(const MultipartFormDataMap &files) {
-    string s;
+std::string dump_multipart_files(const MultipartFormDataMap &files) {
+    std::string s;
     char buf[BUFSIZ];
 
     s += "--------------------------------\n";
@@ -56,8 +54,8 @@ string dump_multipart_files(const MultipartFormDataMap &files) {
     return s;
 }
 
-string log(const Request &req, const Response &res) {
-    string s;
+std::string log(const Request &req, const Response &res) {
+    std::string s;
     char buf[BUFSIZ];
 
     s += "================================\n";
@@ -66,7 +64,7 @@ string log(const Request &req, const Response &res) {
              req.version.c_str(), req.path.c_str());
     s += buf;
 
-    string query;
+    std::string query;
     for (auto it = req.params.begin(); it != req.params.end(); ++it) {
         const auto &x = *it;
         snprintf(buf, sizeof(buf), "%c%s=%s",
@@ -90,16 +88,12 @@ string log(const Request &req, const Response &res) {
 }
 
 int main(int argc, const char **argv) {
-    if (argc > 1 && string("--help") == argv[1]) {
-        cout << "usage: simplesvr [PORT] [DIR]" << endl;
+    if (argc > 1 && std::string("--help") == argv[1]) {
+        std::cout << "usage: simplesvr [PORT] [DIR]" << std::endl;
         return 1;
     }
 
-#ifdef CPPHTTPLIB_OPENSSL_SUPPORT
     SSLServer svr(SERVER_CERT_FILE, SERVER_PRIVATE_KEY_FILE);
-#else
-    Server svr;
-#endif
 
     svr.Post("/multipart", [](const Request &req, Response &res) {
         auto body = dump_headers(req.headers) + dump_multipart_files(req.files);
@@ -116,8 +110,7 @@ int main(int argc, const char **argv) {
 
     svr.set_logger (
         [](const Request &req, const Response &res)
-        { cout << log(req, res); 
-    });
+        { std::cout << log(req, res); });
 
     auto port = 8080;
     if (argc > 1) {
@@ -130,15 +123,15 @@ int main(int argc, const char **argv) {
     }
 
     if (!svr.set_mount_point("/", base_dir)) {
-        cout << "The specified base directory doesn't exist...";
+        std::cout << "The specified base directory doesn't exist...";
         return 1;
     }
 
-    cout << "The server started at port " << port << "..." << endl;
+    std::cout << "The server started at port " << port << "..." << std::endl;
 
     auto code = svr.listen("0.0.0.0", port);
 
-    cout << "Server exited with code:" << code << endl;
+    std::cout << "Server exited with code:" << code << std::endl;
 
     return code;
 }
