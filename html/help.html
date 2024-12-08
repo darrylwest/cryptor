@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Cryptor</title>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="favicon.png" type="imagex-icon">
+    <style>
+        body {
+            background-color: black;
+            background-image: url("bg.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            font-size: large;
+            font-family: sans-serif;
+            margin: 50px;
+            color: white;
+        }
+
+        a {
+            color: white;
+        }
+
+        /* Make the div responsive */
+        .responsive-div {
+            max-width: 90%;
+            /* Restrict maximum width */
+            width: 100%;
+            /* Allow full width of the screen */
+            margin: 0 auto;
+            /* Center the div horizontally */
+            padding: 20px;
+            /* Add padding for better readability */
+            box-sizing: border-box;
+            /* Include padding in the width */
+            background-color: #f0f0f0;
+            /* Optional: Add a background color */
+            border: 1px solid #ccc;
+            /* Optional: Add a border */
+        }
+
+        /* Make the text responsive */
+        .responsive-div p {
+            font-size: 1rem;
+            /* Base font size */
+            line-height: 1.5;
+            /* Improve readability */
+            word-wrap: break-word;
+            /* Ensure long words break */
+        }
+
+        /* Optional: Adjust font size on smaller screens */
+        @media (max-width: 600px) {
+            .responsive-div p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="responsive-div">
+        <h1>Cryptor Application Help</h1>
+
+        <h2>What does this thing do?</h2>
+        <audio controls>
+            <source src="help-1.mp3" type="audio/mpeg">
+        </audio>
+        <p>
+            The Cryptor app is a desktop/laptop browser application that takes a text message you enter and encrypts it
+            based on your _case-sensitive_ passphrase.
+            It then lets you download the result to your personal device (desktop or laptop) as an HTML file embedded
+            with the encrypted data.
+            From there, you can double-click the downloaded file to render it in a browser and decrypt the text using
+            the same passphrase.
+        </p>
+
+        <p>
+            The typical use case is securly saving a list of hard to remember passwords.
+        </p>
+
+        <p>
+            The file cannot be decrypted without the passphrase, so it's important to create a phrase that is long
+            enough to be difficult to guess, and easy to remember.
+        <p>
+
+        <h2>Is it secure?</h2>
+        <p>
+            This is a browser application, with no personal data, text, or passphrase going to the server or over the
+            wire.
+            The encrypted file is only downloaded to your personal device, typically in your downloads folder.
+            The passphrase never leaves your browser and is not stored in cookies, local storage, etc.
+            <em>As with all internet applications that prompt for a password or passphrase, you should always check the
+                address bar to verify the domain.</em>
+        </p>
+
+        <p>Since the passphrase is not sent over the wire and not stored anywhere, it's important to know 
+            that<em>there is no way to recover it.</em>  So, use a phase that you can remember.
+        </p>
+
+        <h2>Pass Phrase Examples</h2>
+        <ul>
+            <li>he who is brave is free. no?</li>
+            <li>you can totally do this.</li>
+            <li>try a slow count to 10, then speak.</li>
+            <li>choose one thing and go all in. or not.</li>
+            <li>I can, and I Will. Smith.</li>
+        </ul>
+
+        <h2>Steps</h2>
+        <audio controls>
+            <source src="help-2.mp3" type="audio/mpeg">
+        </audio>
+        <ol>
+            <li>Enter or copy/paste your message, list of passwords, etc to the message box</li>
+            <li>Enter your passphrase</li>
+            <li>Click the <em>Encrypt Message</em> button</li>
+            <li>Click the <em>Download</em> link</li>
+            <li>Open the downloaded file, enter your passphrase and verity the plain text content</li>
+            <li>(Optional) Move the file to your desktop or other location with an alternate name.</li>
+        </ol>
+
+        <p>
+            Don't forget to close the browser page after verifying the encryption, especially if you are using this in a
+            public setting, like when you have your laptop at a café.
+        </p>
+
+        <p>
+            You can then just leave the file in your downloads folder, or move it to an alternate, or even your desk
+            top.
+            Without the passphrase, it can't be decrypted. And, the passphrase never gets shared to any browser or other
+            application.
+        </p>
+
+        <h2>How to Access and Decrypt your download?</h2>
+        <audio controls>
+            <source src="help-3.mp3" type="audio/mpeg">
+        </audio>
+
+        <p>
+            To access your secrets file, navigate to the file using Finder and double-click it.
+            Once the file opens, enter the passphrase and click the Decrypt button. The decrypted text will appear, and
+            the password field and button will disappear.
+            To hide the plaintext, close or refresh the browser page.
+            The page will automatically time out and close after 5 minutes.
+        </p>
+
+        <h2>Important Things to Concider</h2>
+        <audio controls>
+            <source src="help-4.mp3" type="audio/mpeg">
+        </audio>
+
+        <h2>Updating Existing File</h2>
+        <p>
+            You can update an existing file by first decrpting it, then copy/past to the a new application session.
+            Make changes to the text, then re-encrypt and download the new file.
+        </p>
+
+        <h2>What is the number in filename?</h2>
+        <p>
+            The filename <em>secret-####.html</em> is created in the browser using the current date as a timestamp.
+            The timestamp is from javascript's <em>Date.getTime()</em> method.
+        </p>
+
+        <h2>What happens when I click Encrpt Message Button?</h2>
+        <p>
+            The passphrase is used to encrypt the message right in the browser (not a server action).
+            The resulting cipher text is in the page and appended to the secrets file when you click the download link.
+        </p>
+
+        <h2>Browser Support</h2>
+        <p>This application has been tested on the following Mac OS/OSX (Intel and ARM) desktop browsers...</p>
+        <ul>
+            <li>Chrome</li>
+            <li>Safari</li>
+            <li>Microsoft Edge (for Mac)</li>
+            <li>Firefox (mac and linux)</li>
+            <li>Duck Duck Go</li>
+            <li>Arc Browser</li>
+        </ul>
+        <p>Any browser that uses the latest version (as of 2023) of WebKit should work.</p>
+        <p><em>Note that this works on desktop/laptop machines but isn't recommended for tables or phones.</em>
+
+        <div style="display: none;">
+            <!-- need to develop an installer for this; maybe a clone of miniserve with embedded cryptor files? -->
+            <h2>Need more security from Internet Attacks?</h2>
+            <p>
+                A more secure use of the Cryptor Application is to download the source code and run it on your own
+                machine.
+                The requirement is that you need to run an https (secure sockets) server.
+                I use <a href="https://docs.rs/crate/miniserve/latest">miniserve</a> using the following command:
+            </p>
+            <code>miniserve -p 2024 --index index.html --tls-cert cert.pem --tls-key key.pem</code>
+            <p>
+                You can install miniserve on an OSX/mac with brew.
+            </p>
+        </div>
+    </div>
+
+    <!-- <h2>Screen Shots</h2> -->
+    <h2>Beta Version</h2>
+    <p><em>This application is currently in beta testing with a number of improvements planned prior to formal release.
+            Planned improvements are to the user interface, adding themes, etc; but not the encryption logic. So it's
+            safe to use, but it's look my change before release.</em></p>
+
+    <h2>Take me there...</h2>
+    <p>
+        Ok click <a href="https://darrylwest.github.io/cryptor">here</a> to start the <b>Cryptor</b> web application.
+    </p>
+    
+    <pre>
+        _________                      _____                  _______
+        __  ____/___________  ___________  /______________    ___    |_______________
+        _  /    __  ___/_  / / /__  __ \  __/  __ \_  ___/    __  /| |__  __ \__  __ \
+        / /___  _  /   _  /_/ /__  /_/ / /_ / /_/ /  /        _  ___ |_  /_/ /_  /_/ /
+        \____/  /_/    _\__, / _  .___/\__/ \____//_/         /_/  |_|  .___/_  .___/
+                       /____/  /_/                                   /_/     /_/
+    </pre>
+
+    <h6 style="color: yellow;">Version: 2024.12.05-beta.31 | dpw</h6>
+</body>
+
+</html>
