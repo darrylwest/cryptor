@@ -93,9 +93,15 @@ std::string log(const httplib::Request &req, const httplib::Response &res) {
 int main(int argc, const char **argv) {
     using namespace httplib;
 
-    if (argc > 1 && std::string("--help") == argv[1]) {
-        std::cout << "usage: simplesvr [PORT] [DIR]" << std::endl;
-        return 1;
+    std::vector<std::string> args(argv, argv + argc);
+    auto config = parse_cli(args);
+
+    std::cout << "Server Version: " << Version() << std::endl;
+
+    auto it = std::find(args.begin(), args.end(), "-h");
+    if (it != args.end()) {
+        show_help(args[0]);
+        return 0;
     }
 
     SSLServer svr(SERVER_CERT_FILE, SERVER_PRIVATE_KEY_FILE);
@@ -106,34 +112,31 @@ int main(int argc, const char **argv) {
         res.set_content(body, "text/plain"); 
     });
 
-    svr.set_error_handler([](const Request & /*req*/, Response &res)
-                          {
-    const char *fmt = "<p>Error Status: <span style='color:red;'>%d</span></p>";
-    char buf[BUFSIZ];
-    snprintf(buf, sizeof(buf), fmt, res.status);
-    res.set_content(buf, "text/html"); });
+    svr.set_error_handler([](const Request & /*req*/, Response &res) {
+        const char *fmt = "<p>Error Status: <span style='color:red;'>%d</span></p>";
+        char buf[BUFSIZ];
+        snprintf(buf, sizeof(buf), fmt, res.status);
+        res.set_content(buf, "text/html"); 
+    });
 
     svr.set_logger (
         [](const Request &req, const Response &res)
         { std::cout << log(req, res); });
 
-    auto port = 8080;
+    auto port = config.port;
     if (argc > 1) {
         port = atoi(argv[1]);
     }
 
-    auto base_dir = "./";
-    if (argc > 2) {
-        base_dir = argv[2];
-    }
+    auto base_dir = "../html";
 
     if (!svr.set_mount_point("/", base_dir)) {
         std::cout << "The specified base directory doesn't exist...";
         return 1;
     }
 
-    auto host = "0.0.0.0";
-    std::cout << "Server Version: " << Version() << " started at port " << port << "..." << std::endl;
+    auto host = config.host;
+    std::cout << "Server started at https://" << host << ":" << port << std::endl;
 
     auto code = svr.listen(host, port);
 

@@ -10,7 +10,18 @@
 struct Config {
     std::string host = "0.0.0.0";
     int port = 2022;
+    std::string base_dir = "../html";
     int verbose = 1;
+
+    friend std::ostream& operator<<(std::ostream& os, const Config v) {
+        // better to use <format> but it breaks on linux and fmt broken on darwin
+        os << "host: " << v.host << ", "
+            << "port: " << v.port << ", "
+            << "base : " << v.base_dir << ", "
+            << "verbose: " << v.verbose << "."
+        ;
+        return os;
+    }
 };
 
 // TODO: finish the help strings
@@ -18,10 +29,11 @@ void show_help(std::string pname) {
     std::cout
         << "Usage: " << pname << "[options]\n"
         << "Options:\n"
-        << "  -p port  : port to listen on\n"
-        << "  -r host  : host address\n"
-        << "  -v level : logging verbose level\n"
-        << "  -h       : show this help message.\n"
+        << "  -p port : port to listen on\n"
+        << "  -r host : host address\n"
+        << "  -b base : the base folder to mount as '/'\n"
+        << "  -v level: logging verbose level\n"
+        << "  -h      : show this help message.\n"
         << std::endl
         ;
 }
@@ -30,7 +42,7 @@ void show_help(std::string pname) {
  * parse the command line
  */
 Config parse_cli(std::vector<std::string> args) {
-    Config config = { };
+    auto config = Config();
 
     auto it = std::find(args.begin(), args.end(), "-r");
     if (it != args.end()) {
