@@ -6,7 +6,7 @@
 
 * [x] reformat cpp code for 4 spaces
 * [x] add version.hpp
-* [ ] add cli.hpp with help
+* [x] add cli.hpp with help and implement cxxopts
 * [ ] add logger.hpp with help
 * [ ] add unit.hpp with help
 * [ ] cmake?

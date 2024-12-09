@@ -93,10 +93,12 @@ std::string log(const httplib::Request &req, const httplib::Response &res) {
 int main(int argc, const char **argv) {
     using namespace httplib;
 
-    auto config = parse_cli(argc, argv);
+    const auto config = parse_cli(argc, argv);
 
-    std::cout << "Server Version: " << Version() << std::endl;
-    std::cout << "Server Config : " << config << std::endl;
+    if (config.verbose > 0) {
+        std::cout << "Server Version: " << Version() << std::endl;
+        std::cout << "Server Config : " << config << std::endl;
+    }
 
     SSLServer svr(SERVER_CERT_FILE, SERVER_PRIVATE_KEY_FILE);
 
@@ -117,22 +119,15 @@ int main(int argc, const char **argv) {
         [](const Request &req, const Response &res)
         { std::cout << log(req, res); });
 
-    auto port = config.port;
-    if (argc > 1) {
-        port = atoi(argv[1]);
-    }
 
-    auto base_dir = "../html";
-
-    if (!svr.set_mount_point("/", base_dir)) {
+    if (!svr.set_mount_point("/", config.base_dir)) {
         std::cout << "The specified base directory doesn't exist...";
         return 1;
     }
 
-    auto host = config.host;
-    std::cout << "Server started at https://" << host << ":" << port << std::endl;
+    std::cout << "Server starting at https://" << config.host << ":" << config.port << std::endl;
 
-    auto code = svr.listen(host, port);
+    auto code = svr.listen(config.host, config.port);
 
     std::cout << "Server exited with code:" << code << std::endl;
 

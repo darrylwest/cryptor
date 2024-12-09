@@ -24,7 +24,7 @@ cryptor: cryptor.cpp
 	$(CXX) -o cryptor $(CXXFLAGS) cryptor.cpp $(OPENSSL_SUPPORT) $(ZLIB_SUPPORT) $(BROTLI_SUPPORT)
 
 run:
-	./cryptor
+	./cryptor --base ../html
 
 clean:
 	rm -f cryptor
