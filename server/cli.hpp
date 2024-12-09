@@ -6,6 +6,7 @@
 #define CLI_INCLUDE
 
 #include <iostream>
+#include <cxxopts.hpp>
 
 struct Config {
     std::string host = "0.0.0.0";
@@ -41,15 +42,37 @@ void show_help(std::string pname) {
 /*
  * parse the command line
  */
-Config parse_cli(std::vector<std::string> args) {
+Config parse_cli(const int argc, const char** argv) {
     auto config = Config();
 
-    auto it = std::find(args.begin(), args.end(), "-r");
-    if (it != args.end()) {
-        config.host = *(it + 1);
-    }
+    try {
+        cxxopts::Options options("cryptor", "tls server for cryptor web app");
+        options
+            .add_options()
+                ("p,port", "listening port", cxxopts::value<int>())
+                ("v,version", "Show the current version and exit")
+                ("h,help", "Show this help")
+            ;
 
-    // TODO: parse 
+        auto result = options.parse(argc, argv);
+        if (result.count("version")) {
+            std::cout << "Server Version: " << Version() << std::endl;
+            exit(0);
+        }
+
+        if (result.count("help")) {
+            std::cout << "Server Version: " << Version() << std::endl;
+            std::cout << options.help() << std::endl;
+            exit(0);
+        }
+
+        if (result.count("port")) {
+            config.port = result["port"].as<int>();
+        }
+
+    } catch (const cxxopts::OptionException& e) {
+        std::cout << "error parsing cli options: " << e.what() << std::endl;
+    }
 
     return config;
 }

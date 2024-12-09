@@ -93,16 +93,10 @@ std::string log(const httplib::Request &req, const httplib::Response &res) {
 int main(int argc, const char **argv) {
     using namespace httplib;
 
-    std::vector<std::string> args(argv, argv + argc);
-    auto config = parse_cli(args);
+    auto config = parse_cli(argc, argv);
 
     std::cout << "Server Version: " << Version() << std::endl;
-
-    auto it = std::find(args.begin(), args.end(), "-h");
-    if (it != args.end()) {
-        show_help(args[0]);
-        return 0;
-    }
+    std::cout << "Server Config : " << config << std::endl;
 
     SSLServer svr(SERVER_CERT_FILE, SERVER_PRIVATE_KEY_FILE);
 
