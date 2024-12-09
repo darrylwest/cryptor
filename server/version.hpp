@@ -11,6 +11,7 @@
 #include <iostream>
 #include <sstream>
 #include <ansi_colors.hpp>
+#include <cxxopts.hpp>
 
 /*
 #include <algorithm>
