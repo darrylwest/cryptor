@@ -12,6 +12,7 @@
 * [ ] remove brew from makefile for linux
 * [ ] cmake?
 * [ ] error handling
+* [ ] add a shutdown uri /shutdown
 
 
 ###### 2024.12.09 | dpw
