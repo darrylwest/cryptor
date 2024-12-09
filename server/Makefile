@@ -1,5 +1,5 @@
 #CXX = clang++
-CXXFLAGS = -O2 -std=c++20 -I.. -Wall -Wextra -pthread
+CXXFLAGS = -std=c++20 -I.. -Wall -Wextra -pthread
 
 PREFIX ?= $(shell brew --prefix)
 
@@ -28,3 +28,6 @@ run:
 
 clean:
 	rm cryptor
+
+watch:
+	watchexec --debounce 500 --clear --postpone  --watch ../server --exts cpp,hpp,yaml make

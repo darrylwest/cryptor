@@ -4,14 +4,13 @@
 
 ## To Do
 
-* [ ] reformat cpp code for 4 spaces
-* [ ] add help with optcxx
+* [x] reformat cpp code for 4 spaces
+* [x] add version.hpp
+* [ ] add cli.hpp with help
+* [ ] add logger.hpp with help
+* [ ] add unit.hpp with help
 * [ ] cmake?
-* [ ] fix the log statements to just use push or append
-* [ ] add file logging
-* [ ] add version
-* [ ] create separate hpp files
 * [ ] error handling
 
 
-###### 2024.12.08 | dpw
+###### 2024.12.09 | dpw

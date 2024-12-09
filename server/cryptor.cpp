@@ -3,18 +3,18 @@
 //
 // from the cpp-httplib examples folder
 //
-//
 
 #include <cstdio>
 #include <httplib.h>
 #include <iostream>
 
+#include "version.hpp"
+
 #define SERVER_CERT_FILE "./cert.pem"
 #define SERVER_PRIVATE_KEY_FILE "./key.pem"
 
-using namespace httplib;
+std::string dump_headers(const httplib::Headers &headers) {
 
-std::string dump_headers(const Headers &headers) {
     std::string s;
     char buf[BUFSIZ];
 
@@ -26,7 +26,7 @@ std::string dump_headers(const Headers &headers) {
     return s;
 }
 
-std::string dump_multipart_files(const MultipartFormDataMap &files) {
+std::string dump_multipart_files(const httplib::MultipartFormDataMap &files) {
     std::string s;
     char buf[BUFSIZ];
 
@@ -54,7 +54,7 @@ std::string dump_multipart_files(const MultipartFormDataMap &files) {
     return s;
 }
 
-std::string log(const Request &req, const Response &res) {
+std::string log(const httplib::Request &req, const httplib::Response &res) {
     std::string s;
     char buf[BUFSIZ];
 
@@ -88,6 +88,8 @@ std::string log(const Request &req, const Response &res) {
 }
 
 int main(int argc, const char **argv) {
+    using namespace httplib;
+
     if (argc > 1 && std::string("--help") == argv[1]) {
         std::cout << "usage: simplesvr [PORT] [DIR]" << std::endl;
         return 1;
@@ -127,9 +129,10 @@ int main(int argc, const char **argv) {
         return 1;
     }
 
-    std::cout << "The server started at port " << port << "..." << std::endl;
+    auto host = "0.0.0.0";
+    std::cout << "Server Version: " << Version() << " started at port " << port << "..." << std::endl;
 
-    auto code = svr.listen("0.0.0.0", port);
+    auto code = svr.listen(host, port);
 
     std::cout << "Server exited with code:" << code << std::endl;
 
