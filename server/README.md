@@ -9,6 +9,7 @@
 * [x] add cli.hpp with help and implement cxxopts
 * [ ] add logger.hpp with help
 * [ ] add unit.hpp with help
+* [ ] remove brew from makefile for linux
 * [ ] cmake?
 * [ ] error handling
 
