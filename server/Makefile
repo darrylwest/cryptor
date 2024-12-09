@@ -8,11 +8,11 @@ ifneq ($(OS), Windows_NT)
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S), Darwin)
         PREFIX ?= $(shell brew --prefix)
-    else
-        PREFIX = /usr  # Default Linux PREFIX, adjust if necessary
+#   else
+#       PREFIX = /usr  # Default Linux PREFIX, adjust if necessary
     endif
-else
-    PREFIX = /usr  # Default Windows PREFIX, adjust if necessary
+#lse
+#   PREFIX = /usr  # Default Windows PREFIX, adjust if necessary
 endif
 
 OPENSSL_DIR = $(PREFIX)/opt/openssl@3
