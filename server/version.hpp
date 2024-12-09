@@ -14,6 +14,7 @@
 #include <vector>
 #include <stdexcept>
 #include <algorithm>
+#include <format>
 
 /*
 #include <algorithm>
@@ -38,6 +39,11 @@ struct Version {
         ;
         return os;
     }
+
+    std::string to_string() const {
+        return std::format("{}.{}.{}.{}", major, minor, patch, build);
+    }
+
 };
 
 #endif

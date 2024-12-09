@@ -7,6 +7,7 @@
 #include <cstdio>
 #include <httplib.h>
 #include <iostream>
+#include <spdlog/spdlog.h>
 
 #include "version.hpp"
 #include "cli.hpp"
@@ -65,9 +66,14 @@ int main(int argc, const char **argv) {
 
     const auto config = parse_cli(argc, argv);
 
+    std::string version = "Server Version: ";
+    auto vers = Version();
+    
+    version.append(vers.to_string());
+
     if (config.verbose > 0) {
-        std::cout << "Server Version: " << Version() << std::endl;
-        std::cout << "Server Config : " << config << std::endl;
+        spdlog::info("Server Version: {}", version);
+        // spdlog::info("Server Config : {}", config);
     }
 
     SSLServer svr(SERVER_CERT_FILE, SERVER_PRIVATE_KEY_FILE);
