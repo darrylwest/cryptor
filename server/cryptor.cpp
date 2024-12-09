@@ -28,35 +28,6 @@ std::string dump_headers(const httplib::Headers &headers) {
 }
 
 // TODO : replace with log
-std::string dump_multipart_files(const httplib::MultipartFormDataMap &files) {
-    std::string s;
-    char buf[BUFSIZ];
-
-    s += "--------------------------------\n";
-
-    for (const auto &x : files) {
-        const auto &name = x.first;
-        const auto &file = x.second;
-
-        snprintf(buf, sizeof(buf), "name: %s\n", name.c_str());
-        s += buf;
-
-        snprintf(buf, sizeof(buf), "filename: %s\n", file.filename.c_str());
-        s += buf;
-
-        snprintf(buf, sizeof(buf), "content type: %s\n", file.content_type.c_str());
-        s += buf;
-
-        snprintf(buf, sizeof(buf), "text length: %zu\n", file.content.size());
-        s += buf;
-
-        s += "----------------\n";
-    }
-
-    return s;
-}
-
-// TODO : replace with log
 std::string log(const httplib::Request &req, const httplib::Response &res) {
     std::string s;
     char buf[BUFSIZ];
@@ -79,7 +50,6 @@ std::string log(const httplib::Request &req, const httplib::Response &res) {
     s += buf;
 
     s += dump_headers(req.headers);
-    s += dump_multipart_files(req.files);
 
     s += "--------------------------------\n";
 
@@ -102,11 +72,10 @@ int main(int argc, const char **argv) {
 
     SSLServer svr(SERVER_CERT_FILE, SERVER_PRIVATE_KEY_FILE);
 
-    svr.Post("/multipart", [](const Request &req, Response &res) {
-        auto body = dump_headers(req.headers) + dump_multipart_files(req.files);
-
-        res.set_content(body, "text/plain"); 
-    });
+    if (svr.is_valid() == 0) {
+        std::cout << "Server is not valid. Check the cert/key files? " << std::endl;
+        return 1;
+    }
 
     svr.set_error_handler([](const Request & /*req*/, Response &res) {
         const char *fmt = "<p>Error Status: <span style='color:red;'>%d</span></p>";
