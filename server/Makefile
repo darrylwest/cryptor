@@ -24,10 +24,10 @@ cryptor: cryptor.cpp
 	$(CXX) -o cryptor $(CXXFLAGS) cryptor.cpp $(OPENSSL_SUPPORT) $(ZLIB_SUPPORT) $(BROTLI_SUPPORT)
 
 run:
-	./cryptor 2022 ../html/
+	./cryptor
 
 clean:
-	rm cryptor
+	rm -f cryptor
 
 watch:
 	watchexec --debounce 500 --clear --postpone  --watch ../server --exts cpp,hpp,yaml make
