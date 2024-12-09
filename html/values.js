@@ -7,4 +7,3 @@ const iterations = '{.ITERATIONS}'
 const saltHex    = "'{.SALT_HEX}'"
 const ivHex      = "'{.IV_HEX}'"
 const cipherHex  = "'{.CIPHER_HEX}'"
-const appVersion = "2024.12.05-beta.32"
