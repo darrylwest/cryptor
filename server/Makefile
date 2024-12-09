@@ -1,18 +1,12 @@
 # CXX = clang++
 CXXFLAGS = -std=c++20 -I.. -Wall -Wextra -pthread
 
-# PREFIX ?= $(shell brew --prefix)
-
 # Conditionally define PREFIX only for macOS (Darwin)
 ifneq ($(OS), Windows_NT)
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S), Darwin)
         PREFIX ?= $(shell brew --prefix)
-#   else
-#       PREFIX = /usr  # Default Linux PREFIX, adjust if necessary
-    endif
-#lse
-#   PREFIX = /usr  # Default Windows PREFIX, adjust if necessary
+	endif
 endif
 
 OPENSSL_DIR = $(PREFIX)/opt/openssl@3
