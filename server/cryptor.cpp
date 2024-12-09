@@ -9,12 +9,13 @@
 #include <iostream>
 
 #include "version.hpp"
+#include "cli.hpp"
 
 #define SERVER_CERT_FILE "./cert.pem"
 #define SERVER_PRIVATE_KEY_FILE "./key.pem"
 
+// TODO : replace with log
 std::string dump_headers(const httplib::Headers &headers) {
-
     std::string s;
     char buf[BUFSIZ];
 
@@ -26,6 +27,7 @@ std::string dump_headers(const httplib::Headers &headers) {
     return s;
 }
 
+// TODO : replace with log
 std::string dump_multipart_files(const httplib::MultipartFormDataMap &files) {
     std::string s;
     char buf[BUFSIZ];
@@ -54,6 +56,7 @@ std::string dump_multipart_files(const httplib::MultipartFormDataMap &files) {
     return s;
 }
 
+// TODO : replace with log
 std::string log(const httplib::Request &req, const httplib::Response &res) {
     std::string s;
     char buf[BUFSIZ];

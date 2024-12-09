@@ -1,4 +1,4 @@
-#CXX = clang++
+# CXX = clang++
 CXXFLAGS = -std=c++20 -I.. -Wall -Wextra -pthread
 
 PREFIX ?= $(shell brew --prefix)
