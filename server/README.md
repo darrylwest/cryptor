@@ -1,6 +1,15 @@
 # Cryptor Server
 
+## Basic Use
+
+### Shutdown Hook
+
+### Shutdown Hook
+
+curl -k -XDELETE https://<host>:<port>/shutdown
+
 ## cpp-httplib
+
 
 ## Installation Instructions
 
@@ -14,12 +23,14 @@ The server requires cert.pem and key.pem files.
 * [ ] clang++ Apple clang version 16.0.0 (clang-1600.0.26.4)
 * [ ] spdlog
 * [ ] openssl@3
+* [ ] cpp-httplib
 
 ### Linux
 
 * [ ] g++ version 11.
-* [ ] spdlog (complied with make instll)
+* [ ] spdlog (complied with make install)
 * [ ] openssl@3
+* [ ] cpp-httplib
 
 ## To Do
 
@@ -34,6 +45,7 @@ The server requires cert.pem and key.pem files.
 * [ ] replace the cert/key file define with attrs in Config; add to CLI --cert <file> --key <file>
 * [ ] cmake? use AI to generate based on text from Makefile and cryptor.cpp
 * [ ] error handling
+* [ ] refactor repo to put server at top level and html below
 
 
 ###### 2024.12.10 | dpw
