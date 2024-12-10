@@ -14,7 +14,6 @@
 #include <vector>
 #include <stdexcept>
 #include <algorithm>
-#include <format>
 
 /*
 #include <algorithm>
@@ -28,7 +27,7 @@ struct Version {
     int major = 2024;
     int minor = 12;
     int patch = 10;
-    int build = 7;
+    int build = 108;
 
     friend std::ostream& operator<<(std::ostream& os, const Version v) {
         // better to use <format> but it breaks on linux and fmt broken on darwin
@@ -41,7 +40,10 @@ struct Version {
     }
 
     std::string to_string() const {
-        return std::format("{}.{}.{}.{}", major, minor, patch, build);
+        std::ostringstream oss;
+        oss << this;
+
+        return oss.str();
     }
 
 };
