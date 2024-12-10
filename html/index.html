@@ -257,6 +257,7 @@
                 secretPage = pageTemplate
                 secretPage = secretPage.replaceAll("{{PASSWORD_HINT}}", passwordHint)
                 secretPage = secretPage.replaceAll("{{VALUES}}\n", values)
+                secretPage = secretPage.replaceAll("{{VERSION}}", AppVersion);
 
                 const dataURI = "data:application/octet-stream;base64," + btoa(secretPage)
                 const tlink = document.getElementById("target_link")
@@ -399,7 +400,7 @@
         <a href="https://raincitysoftware.com">help</a>
     </p>
     <h6 style="color: yellow;">
-        Version: <span id="version"></span> | <a href="terms-of-use.html">Terms of Use</a> | <a href="license.html">License</a> | <a href="help.html">help</a>
+        Version: <span id="version"></span> | <a href="terms-of-use.html">Terms of Use</a> | <a href="license.html">License</a> | <a href="help.html">Help</a>
     </h6>
 </body>
 </html>

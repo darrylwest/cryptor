@@ -1,7 +1,7 @@
 
-const version = '2024.12.10-beta.33';
+const AppVersion = '2024.12.10-beta.34';
 
 function setVersion() {
     const vel = document.getElementById('version');
-    vel.textContent = version;
+    vel.textContent = AppVersion;
 }
