@@ -79,7 +79,7 @@ int main(int argc, const char **argv) {
     SSLServer svr(SERVER_CERT_FILE, SERVER_PRIVATE_KEY_FILE);
 
     if (svr.is_valid() == 0) {
-        std::cout << "Server is not valid. Check the cert/key files? " << std::endl;
+        spdlog::error("ERROR! Server is not valid. Check the cert/key files? exiting...");
         return 1;
     }
 
@@ -91,20 +91,21 @@ int main(int argc, const char **argv) {
     });
 
     svr.set_logger (
-        [](const Request &req, const Response &res)
-        { std::cout << log(req, res); });
+        [](const Request &req, const Response &res) { 
+            spdlog::info(log(req, res)); 
+        });
 
 
     if (!svr.set_mount_point("/", config.base_dir)) {
-        std::cout << "The specified base directory doesn't exist...";
+        spdlog::error("ERROR! The specified base directory {} doesn't exist...", config.base_dir);
         return 1;
     }
 
-    std::cout << "Server starting at https://" << config.host << ":" << config.port << std::endl;
+    spdlog::info("Server starting at https://{}:{}", config.host, config.port);
 
     auto code = svr.listen(config.host, config.port);
 
-    std::cout << "Server exited with code:" << code << std::endl;
+    spdlog::info("Server shutdown, code: {}...", code);
 
     return code;
 }
