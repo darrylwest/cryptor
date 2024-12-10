@@ -57,9 +57,15 @@
             }
         }
     </style>
+    <script src="version.js"></script>
+    <script>
+        async function init() {
+            setVersion();
+        }
+    </script>
 </head>
 
-<body>
+<body onload="init()">
     <div id="responsive-div">
         <h1>Cryptor Terms of Use</h1>
 
@@ -126,6 +132,6 @@
     </div>
 
 
-    <h6 style="color: yellow;">Version: 2024.12.10-beta.32</h6>
+    <h6 style="color: yellow;">Version: <span id="version"></span></h6>
 
 </body>
