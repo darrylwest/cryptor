@@ -15,7 +15,7 @@
 #define SERVER_CERT_FILE "./cert.pem"
 #define SERVER_PRIVATE_KEY_FILE "./key.pem"
 
-// TODO : replace with spdlog
+// TODO : replace with spdlog info calls
 std::string dump_headers(const httplib::Headers &headers) {
     std::string s;
     char buf[BUFSIZ];
@@ -28,7 +28,7 @@ std::string dump_headers(const httplib::Headers &headers) {
     return s;
 }
 
-// TODO : replace with log
+// TODO : replace with spdlog info calls
 std::string log(const httplib::Request &req, const httplib::Response &res) {
     std::string s;
     char buf[BUFSIZ];
