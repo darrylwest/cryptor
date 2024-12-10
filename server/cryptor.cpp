@@ -15,7 +15,7 @@
 #define SERVER_CERT_FILE "./cert.pem"
 #define SERVER_PRIVATE_KEY_FILE "./key.pem"
 
-// TODO : replace with log
+// TODO : replace with spdlog
 std::string dump_headers(const httplib::Headers &headers) {
     std::string s;
     char buf[BUFSIZ];
@@ -94,7 +94,6 @@ int main(int argc, const char **argv) {
         [](const Request &req, const Response &res) { 
             spdlog::info(log(req, res)); 
         });
-
 
     if (!svr.set_mount_point("/", config.base_dir)) {
         spdlog::error("ERROR! The specified base directory {} doesn't exist...", config.base_dir);

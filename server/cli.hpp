@@ -50,14 +50,15 @@ Config parse_cli(const int argc, const char** argv) {
                 ("h,help", "Show this help")
             ;
 
-        auto result = options.parse(argc, argv);
+        const auto version = Version();
+        const auto result = options.parse(argc, argv);
         if (result.count("version")) {
-            std::cout << "Server Version: " << Version() << std::endl;
+            std::cout << "Server Version: " << version << std::endl;
             exit(0);
         }
 
         if (result.count("help")) {
-            std::cout << "Server Version: " << Version() << std::endl;
+            std::cout << "Server Version: " << version << std::endl;
             std::cout << options.help() << std::endl;
             exit(0);
         }
