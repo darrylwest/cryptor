@@ -7,9 +7,9 @@
 * [x] reformat cpp code for 4 spaces
 * [x] add version.hpp
 * [x] add cli.hpp with help and implement cxxopts
-* [ ] add logger.hpp with help
+* [x] add spdlog 
 * [ ] add unit.hpp with help
-* [ ] remove brew from makefile for linux
+* [x] remove brew from makefile for linux
 * [ ] cmake?
 * [ ] error handling
 * [ ] add a shutdown uri /shutdown
