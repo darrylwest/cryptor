@@ -15,50 +15,29 @@
 #define SERVER_CERT_FILE "./cert.pem"
 #define SERVER_PRIVATE_KEY_FILE "./key.pem"
 
-// TODO : replace with spdlog info calls
-std::string dump_headers(const httplib::Headers &headers) {
-    std::string s;
-    char buf[BUFSIZ];
-
+void show_headers(const httplib::Headers &headers) {
     for (const auto &x : headers) {
-        snprintf(buf, sizeof(buf), "%s: %s\n", x.first.c_str(), x.second.c_str());
-        s += buf;
+        spdlog::info("{}:{}", x.first.c_str(), x.second.c_str());
     }
-
-    return s;
 }
 
-// TODO : replace with spdlog info calls
-std::string log(const httplib::Request &req, const httplib::Response &res) {
-    std::string s;
-    char buf[BUFSIZ];
+void log_request(const httplib::Request &req, const httplib::Response &res) {
+    spdlog::info("{} {} {}", req.method.c_str(), req.version.c_str(), req.path.c_str());
 
-    s += "================================\n";
-
-    snprintf(buf, sizeof(buf), "%s %s %s", req.method.c_str(),
-             req.version.c_str(), req.path.c_str());
-    s += buf;
-
-    std::string query;
     for (auto it = req.params.begin(); it != req.params.end(); ++it) {
         const auto &x = *it;
-        snprintf(buf, sizeof(buf), "%c%s=%s",
-                 (it == req.params.begin()) ? '?' : '&', x.first.c_str(),
-                 x.second.c_str());
-        query += buf;
+        spdlog::info("{}={}", x.first.c_str(), x.second.c_str());
     }
-    snprintf(buf, sizeof(buf), "%s\n", query.c_str());
-    s += buf;
 
-    s += dump_headers(req.headers);
+    show_headers(req.headers);
 
-    s += "--------------------------------\n";
+    if (res.status > 299) {
+        spdlog::error("Response status: {}", res.status);
+    } else {
+        spdlog::info("Response status: {}", res.status);
+    }
 
-    snprintf(buf, sizeof(buf), "%d\n", res.status);
-    s += buf;
-    s += dump_headers(res.headers);
-
-    return s;
+    show_headers(res.headers);
 }
 
 int main(int argc, const char **argv) {
@@ -92,7 +71,7 @@ int main(int argc, const char **argv) {
 
     svr.set_logger (
         [](const Request &req, const Response &res) { 
-            spdlog::info(log(req, res)); 
+            log_request(req, res); 
         });
 
     if (!svr.set_mount_point("/", config.base_dir)) {
