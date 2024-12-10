@@ -8,6 +8,7 @@
 * [x] add version.hpp
 * [x] add cli.hpp with help and implement cxxopts
 * [x] add spdlog 
+* [ ] fix logging to use spdlog
 * [ ] add unit.hpp with help
 * [x] remove brew from makefile for linux
 * [ ] cmake?
