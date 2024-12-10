@@ -12,6 +12,7 @@
 #include "version.hpp"
 #include "cli.hpp"
 
+// TODO : move this to Config
 #define SERVER_CERT_FILE "./cert.pem"
 #define SERVER_PRIVATE_KEY_FILE "./key.pem"
 
@@ -62,6 +63,7 @@ int main(int argc, const char **argv) {
         return 1;
     }
 
+    // TODO : create a better error page
     svr.set_error_handler([](const Request & /*req*/, Response &res) {
         const char *fmt = "<p>Error Status: <span style='color:red;'>%d</span></p>";
         char buf[BUFSIZ];
@@ -78,6 +80,13 @@ int main(int argc, const char **argv) {
         spdlog::error("ERROR! The specified base directory {} doesn't exist...", config.base_dir);
         return 1;
     }
+
+    // shutdown hook
+    svr.Delete("/shutdown", [&](const Request &, Response &res) {
+        res.set_content("ok, shutting down...", "text/plain");
+        spdlog::info("shutting down...");
+        svr.stop();
+    });
 
     spdlog::info("Server starting at https://{}:{}", config.host, config.port);
 
