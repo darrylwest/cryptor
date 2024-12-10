@@ -23,6 +23,13 @@ struct Config {
         ;
         return os;
     }
+
+    std::string to_string() const {
+        std::ostringstream oss;
+        oss << *this;
+
+        return oss.str();
+    }
 };
 
 /*

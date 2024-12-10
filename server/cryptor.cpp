@@ -73,7 +73,7 @@ int main(int argc, const char **argv) {
 
     if (config.verbose > 0) {
         spdlog::info("Server Version: {}", version);
-        // spdlog::info("Server Config : {}", config);
+        spdlog::info("Server Config : {}", config.to_string());
     }
 
     SSLServer svr(SERVER_CERT_FILE, SERVER_PRIVATE_KEY_FILE);
