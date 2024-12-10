@@ -41,7 +41,7 @@ struct Version {
 
     std::string to_string() const {
         std::ostringstream oss;
-        oss << this;
+        oss << *this;
 
         return oss.str();
     }
