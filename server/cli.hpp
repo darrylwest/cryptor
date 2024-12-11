@@ -49,8 +49,10 @@ Config parse_cli(const int argc, const char** argv) {
                 ("p,port", "listening port", cxxopts::value<int>())
                 ("H,host", "listening host", cxxopts::value<std::string>())
                 ("b,base", "base directory to serve", cxxopts::value<std::string>())
+                ("C,cert", "the cert pem file", cxxopts::value<std::string>())
+                ("K,key", "the key pem file", cxxopts::value<std::string>())
                 ("l,level", "verbose level 0--4", cxxopts::value<int>())
-                ("v,version", "Show the current version and exit")
+                ("V,version", "Show the current version and exit")
                 ("h,help", "Show this help")
             ;
 
@@ -73,6 +75,14 @@ Config parse_cli(const int argc, const char** argv) {
 
         if (result.count("base")) {
             config.base_dir = result["base"].as<std::string>();
+        }
+
+        if (result.count("cert")) {
+            config.cert_file = result["cert"].as<std::string>();
+        }
+
+        if (result.count("key")) {
+            config.cert_file = result["key"].as<std::string>();
         }
 
     } catch (const cxxopts::OptionException& e) {
