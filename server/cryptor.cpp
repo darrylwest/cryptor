@@ -11,35 +11,11 @@
 
 #include "version.hpp"
 #include "cli.hpp"
+#include "logging.hpp"
 
 // TODO : move this to Config
 #define SERVER_CERT_FILE "./cert.pem"
 #define SERVER_PRIVATE_KEY_FILE "./key.pem"
-
-void show_headers(const httplib::Headers &headers) {
-    for (const auto &x : headers) {
-        spdlog::info("{}:{}", x.first.c_str(), x.second.c_str());
-    }
-}
-
-void log_request(const httplib::Request &req, const httplib::Response &res) {
-    spdlog::info("{} {} {}", req.method.c_str(), req.version.c_str(), req.path.c_str());
-
-    for (auto it = req.params.begin(); it != req.params.end(); ++it) {
-        const auto &x = *it;
-        spdlog::info("{}={}", x.first.c_str(), x.second.c_str());
-    }
-
-    show_headers(req.headers);
-
-    if (res.status > 299) {
-        spdlog::error("Response status: {}", res.status);
-    } else {
-        spdlog::info("Response status: {}", res.status);
-    }
-
-    show_headers(res.headers);
-}
 
 int main(int argc, const char **argv) {
     using namespace httplib;
