@@ -3,6 +3,8 @@
   AccessModifierOffset: '-2'
   AlignTrailingComments: 'true'
   AllowAllParametersOfDeclarationOnNextLine: 'false'
+  AllowShortFunctionsOnASingleLine: None
+  AllowShortLambdasOnASingleLine: None
   AlwaysBreakTemplateDeclarations: 'No'
   BreakBeforeBraces: Attach
   ColumnLimit: '100'

@@ -5,8 +5,8 @@
 #ifndef CLI_INCLUDE
 #define CLI_INCLUDE
 
-#include <iostream>
 #include <cxxopts.hpp>
+#include <iostream>
 
 #include "version.hpp"
 
@@ -21,12 +21,11 @@ struct Config {
     friend std::ostream& operator<<(std::ostream& os, const Config v) {
         // better to use <format> but it breaks on linux and fmt broken on darwin
         os << "host: " << v.host << ", "
-            << "port: " << v.port << ", "
-            << "base: " << v.base_dir << ", "
-            << "cert: " << v.cert_file << ", "
-            << "key : " << v.key_file << ", "
-            << "verbose: " << v.verbose << "."
-        ;
+           << "port: " << v.port << ", "
+           << "base: " << v.base_dir << ", "
+           << "cert: " << v.cert_file << ", "
+           << "key : " << v.key_file << ", "
+           << "verbose: " << v.verbose << ".";
         return os;
     }
 
@@ -46,6 +45,7 @@ Config parse_cli(const int argc, const char** argv) {
 
     try {
         cxxopts::Options options("cryptor", "tls server for cryptor web app");
+        // clang-format off
         options
             .add_options()
                 ("p,port", "listening port", cxxopts::value<int>())
@@ -58,6 +58,7 @@ Config parse_cli(const int argc, const char** argv) {
                 ("h,help", "Show this help")
             ;
 
+        // clang-format on
         const auto version = Version();
         const auto result = options.parse(argc, argv);
         if (result.count("version")) {
@@ -93,6 +94,5 @@ Config parse_cli(const int argc, const char** argv) {
 
     return config;
 }
-
 
 #endif
