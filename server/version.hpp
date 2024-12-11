@@ -10,7 +10,6 @@
 
 #include <iostream>
 #include <sstream>
-#include <ansi_colors.hpp>
 #include <algorithm>
 #include <stdexcept>
 #include <vector>

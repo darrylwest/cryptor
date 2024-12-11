@@ -1,3 +1,6 @@
+
+.PHONY: unit run buildrun watch shutdown
+
 # CXX = clang++
 CXXFLAGS = -std=c++20 -I.. -Wall -Wextra -pthread
 
@@ -30,13 +33,15 @@ cryptor: cryptor.cpp
 	$(CXX) -o cryptor $(CXXFLAGS) cryptor.cpp $(OPENSSL_SUPPORT) $(ZLIB_SUPPORT) $(BROTLI_SUPPORT)
 
 unit:
+	rm -f unit
 	$(CXX) -o unit $(CXXFLAGS) unit.cpp
+	./unit
 
 run:
 	./cryptor --base ../html
 
 clean:
-	rm -f cryptor
+	rm -f cryptor unit
 
 buildrun:
 	make clean && make && make run &
