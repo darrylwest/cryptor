@@ -19,9 +19,15 @@ Results test_version() {
 Results test_cli() {
     Results r = { .name = "CLI Tests" };
 
-    std::vector<std::string> args;
-    // args.push_back("unit");
-    // args.push_back("0:50");
+    std::vector<std::string> args = {"test", "-p", "2500"};
+    char** argv = new char*[args.size()];
+
+    for (std::size_t i = 0; i < args.size(); i++) {
+        argv[i] = const_cast<char*>(args[i].c_str());
+    }
+
+    auto config = parse_cli(args.size(), argv);
+    r.equals(config.port == 2500, "the port assignment");
 
     return r;
 }

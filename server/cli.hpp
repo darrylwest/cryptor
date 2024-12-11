@@ -40,7 +40,7 @@ struct Config {
 /*
  * parse the command line
  */
-Config parse_cli(const int argc, const char** argv) {
+Config parse_cli(const int argc, char** argv) {
     auto config = Config();
 
     try {
