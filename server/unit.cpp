@@ -117,13 +117,34 @@ Results test_cli() {
     return r;
 }
 
+void test_default_service(Results& r) {
+    auto config = Config();
+    httplib::SSLServer svr(config.cert_file.c_str(), config.key_file.c_str());
+    auto ok = setup_service(svr, config);
+
+    r.equals(ok == true, "should create the default server");
+}
+
+void test_bad_cert(Results& r) {
+    auto config = Config();
+    config.cert_file = "./no-file-here.pem";
+    httplib::SSLServer svr(config.cert_file.c_str(), config.key_file.c_str());
+    auto ok = setup_service(svr, config);
+
+    r.equals(ok == false, "should fail with bad cert file server");
+}
+
 Results test_service() {
     Results r = {.name = "HTTPS Service Tests"};
 
+    test_default_service(r);
+    test_bad_cert(r);
     return r;
 }
 
 int main(int argc, char* argv[]) {
+    spdlog::set_level(spdlog::level::off);
+
     std::cout << cyan << "Cryptor Server Tests, Version: " << yellow << Version() << reset << "\n"
               << std::endl;
     std::vector<std::string> args(argv, argv + argc);
