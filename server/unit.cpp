@@ -143,12 +143,22 @@ void test_bad_key(Results& r) {
     r.equals(ok == false, "should fail with bad cert file server");
 }
 
+void test_bad_mount(Results& r) {
+    auto config = Config();
+    config.base_dir = "./no-file-here.pem";
+    httplib::SSLServer svr(config.cert_file.c_str(), config.key_file.c_str());
+    auto ok = setup_service(svr, config);
+
+    r.equals(ok == false, "should fail with bad mount point server");
+}
+
 Results test_service() {
     Results r = {.name = "HTTPS Service Tests"};
 
     test_default_service(r);
     test_bad_cert(r);
     test_bad_key(r);
+    test_bad_mount(r);
 
     return r;
 }
