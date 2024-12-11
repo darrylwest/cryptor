@@ -44,7 +44,9 @@ int main(int argc, const char **argv) {
         res.set_content(buf, "text/html");
     });
 
-    svr.set_logger([](const Request &req, const Response &res) { log_request(req, res); });
+    svr.set_logger([](const Request &req, const Response &res) {
+        log_request(req, res);
+    });
 
     if (!svr.set_mount_point("/", config.base_dir)) {
         spdlog::error("ERROR! The specified base directory {} doesn't exist...", config.base_dir);
