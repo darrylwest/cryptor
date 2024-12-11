@@ -48,7 +48,7 @@ The server requires cert.pem and key.pem files.
 * [x] remove brew from makefile for linux
 * [x] replace the cert/key file define with attrs in Config; 
 * [x] add CLI --cert <file> --key <file>
-* [ ] add unit.cpp with cli and help
+* [x] add unit.cpp with cli and help
 * [ ] implement tests with httplib https client
 * [ ] refactor main to move all the service stuff to service.hpp
 * [ ] move the project to the starter template

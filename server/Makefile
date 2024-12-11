@@ -46,6 +46,9 @@ clean:
 buildrun:
 	make clean && make && make run
 
+page:
+	curl -k https://localhost:2022/
+
 shutdown:
 	curl -k -XDELETE https://localhost:2022/shutdown
 
