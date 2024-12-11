@@ -16,18 +16,60 @@ Results test_version() {
     return r;
 }
 
+// 
+// cli tests and helper funcs
+//
+std::pair<int, char**> build_args(const std::vector<std::string>& vargs) {
+    int argc = vargs.size();
+    
+    // Allocate memory for argv
+    char** argv = new char*[argc];
+
+    // Fill the argv array with C-style strings
+    for (int i = 0; i < argc; ++i) {
+        argv[i] = const_cast<char*>(vargs[i].c_str()); // Unsafe cast for illustration purposes
+    }
+
+    return {argc, argv};
+}
+
+void test_default_config(Results& r) {
+    const std::vector<std::string> args = {"test"};
+    auto [argc, argv] = build_args(args);
+    auto cfg = parse_cli(argc, argv);
+
+    r.equals(cfg.port == 2022, "the default port assignment");
+    r.equals(cfg.host == "0.0.0.0", "the default host assignment");
+    r.equals(cfg.base_dir == "./", "the default base dir assignment");
+    r.equals(cfg.verbose == 1, "the default verbose assignment");
+    r.equals(cfg.cert_file == "./cert.pem", "the default cert file assignment");
+    r.equals(cfg.key_file == "./key.pem", "the default key file assignment");
+}
+
+void test_port(Results& r) {
+    const std::vector<std::string> args = {"test", "-p", "2500"};
+    auto [argc, argv] = build_args(args);
+    auto cfg = parse_cli(argc, argv);
+
+    r.equals(cfg.port == 2500, "the port assignment");
+}
+
+void test_host(Results& r) {
+    const std::vector<std::string> args = {"test", "--host", "1.1.1.1"};
+    auto [argc, argv] = build_args(args);
+    auto cfg = parse_cli(argc, argv);
+
+    // std::cout << cfg << std::endl;
+    r.equals(cfg.host == "1.1.1.1", "the host assignment");
+    r.equals(cfg.port == 2022, "the default port assignment");
+}
+
 Results test_cli() {
     Results r = {.name = "CLI Tests"};
 
-    std::vector<std::string> args = {"test", "-p", "2500"};
-    char** argv = new char*[args.size()];
-
-    for (std::size_t i = 0; i < args.size(); i++) {
-        argv[i] = const_cast<char*>(args[i].c_str());
-    }
-
-    auto config = parse_cli(args.size(), argv);
-    r.equals(config.port == 2500, "the port assignment");
+    test_default_config(r);
+    test_port(r);
+    test_host(r);
 
     return r;
 }

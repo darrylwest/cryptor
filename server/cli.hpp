@@ -76,6 +76,10 @@ Config parse_cli(const int argc, char** argv) {
             config.port = result["port"].as<int>();
         }
 
+        if (result.count("host")) {
+            config.host = result["host"].as<std::string>();
+        }
+
         if (result.count("base")) {
             config.base_dir = result["base"].as<std::string>();
         }
