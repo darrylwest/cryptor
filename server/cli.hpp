@@ -22,7 +22,9 @@ struct Config {
         // better to use <format> but it breaks on linux and fmt broken on darwin
         os << "host: " << v.host << ", "
             << "port: " << v.port << ", "
-            << "base : " << v.base_dir << ", "
+            << "base: " << v.base_dir << ", "
+            << "cert: " << v.cert_file << ", "
+            << "key : " << v.key_file << ", "
             << "verbose: " << v.verbose << "."
         ;
         return os;
@@ -82,7 +84,7 @@ Config parse_cli(const int argc, const char** argv) {
         }
 
         if (result.count("key")) {
-            config.cert_file = result["key"].as<std::string>();
+            config.key_file = result["key"].as<std::string>();
         }
 
     } catch (const cxxopts::OptionException& e) {
