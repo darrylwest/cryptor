@@ -16,18 +16,18 @@ Results test_version() {
     return r;
 }
 
-// 
+//
 // cli tests and helper funcs
 //
 std::pair<int, char**> build_args(const std::vector<std::string>& vargs) {
     int argc = vargs.size();
-    
+
     // Allocate memory for argv
     char** argv = new char*[argc];
 
     // Fill the argv array with C-style strings
     for (int i = 0; i < argc; ++i) {
-        argv[i] = const_cast<char*>(vargs[i].c_str()); // Unsafe cast for illustration purposes
+        argv[i] = const_cast<char*>(vargs[i].c_str());  // Unsafe cast for illustration purposes
     }
 
     return {argc, argv};
