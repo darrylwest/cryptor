@@ -6,9 +6,9 @@
 
 #include "cli.hpp"
 #include "logging.hpp"
-#include "version.hpp"
 #include "service.hpp"
 #include "testlib.hpp"
+#include "version.hpp"
 
 // the actual tests
 
