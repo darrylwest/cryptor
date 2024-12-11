@@ -47,7 +47,7 @@ The server requires cert.pem and key.pem files.
 * [x] add a shutdown uri /shutdown (delete method)
 * [x] remove brew from makefile for linux
 * [x] replace the cert/key file define with attrs in Config; 
-* [ ] add CLI --cert <file> --key <file>
+* [x] add CLI --cert <file> --key <file>
 * [ ] add unit.cpp with cli and help
 * [ ] implement tests with httplib https client
 * [ ] refactor main to move all the service stuff to service.hpp

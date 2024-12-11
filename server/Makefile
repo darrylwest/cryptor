@@ -29,6 +29,9 @@ all: cryptor
 cryptor: cryptor.cpp
 	$(CXX) -o cryptor $(CXXFLAGS) cryptor.cpp $(OPENSSL_SUPPORT) $(ZLIB_SUPPORT) $(BROTLI_SUPPORT)
 
+unit:
+	$(CXX) -o unit $(CXXFLAGS) unit.cpp
+
 run:
 	./cryptor --base ../html
 
