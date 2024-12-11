@@ -59,9 +59,29 @@ void test_host(Results& r) {
     auto [argc, argv] = build_args(args);
     auto cfg = parse_cli(argc, argv);
 
-    // std::cout << cfg << std::endl;
     r.equals(cfg.host == "1.1.1.1", "the host assignment");
     r.equals(cfg.port == 2022, "the default port assignment");
+}
+
+void test_base(Results& r) {
+    auto base = "/www/home";
+    const std::vector<std::string> args = {"test", "--base", base};
+    auto [argc, argv] = build_args(args);
+    auto cfg = parse_cli(argc, argv);
+
+    r.equals(cfg.base_dir == base, "the base assignment");
+}
+
+void test_cert_key(Results& r) {
+    auto cert = "my-cert.pem";
+    auto key = "my-key.pem";
+
+    const std::vector<std::string> args = {"test", "--cert", cert, "--key", key};
+    auto [argc, argv] = build_args(args);
+    auto cfg = parse_cli(argc, argv);
+
+    r.equals(cfg.cert_file == cert, "the cert file assignment");
+    r.equals(cfg.key_file == key, "the key file assignment");
 }
 
 Results test_cli() {
@@ -70,6 +90,8 @@ Results test_cli() {
     test_default_config(r);
     test_port(r);
     test_host(r);
+    test_base(r);
+    test_cert_key(r);
 
     return r;
 }

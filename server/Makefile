@@ -44,10 +44,10 @@ clean:
 	rm -f cryptor unit
 
 buildrun:
-	make clean && make && make run &
+	make clean && make && make run
 
 shutdown:
 	curl -k -XDELETE https://localhost:2022/shutdown
 
 watch:
-	watchexec --debounce 500 --clear --postpone  --watch ../server --exts cpp,hpp,yaml make
+	watchexec --debounce 500 --clear --postpone  --watch ../server --exts cpp,hpp,yaml make unit
