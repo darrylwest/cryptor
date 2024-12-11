@@ -14,7 +14,7 @@
 #include "logging.hpp"
 #include "version.hpp"
 
-int main(int argc, const char **argv) {
+int main(const int argc, char **argv) {
     using namespace httplib;
 
     const auto config = parse_cli(argc, argv);
