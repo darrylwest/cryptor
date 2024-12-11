@@ -10,6 +10,8 @@ _TBD_
 
 curl -k -XDELETE https://<host>:<port>/shutdown
 
+or on the local dev machine, `make shutdown`
+
 ## cpp-httplib
 
 
@@ -44,10 +46,11 @@ The server requires cert.pem and key.pem files.
 * [x] fix logging to use spdlog
 * [x] add a shutdown uri /shutdown (delete method)
 * [x] remove brew from makefile for linux
-* [ ] refactor main to move all the service stuff to service.hpp
+* [x] replace the cert/key file define with attrs in Config; 
+* [ ] add CLI --cert <file> --key <file>
 * [ ] add unit.cpp with cli and help
 * [ ] implement tests with httplib https client
-* [ ] replace the cert/key file define with attrs in Config; add to CLI --cert <file> --key <file>
+* [ ] refactor main to move all the service stuff to service.hpp
 * [ ] move the project to the starter template
 * [ ] error handling
 * [ ] refactor repo to put server at top level and html below
