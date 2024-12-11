@@ -26,6 +26,7 @@ The server requires cert.pem and key.pem files.
 * [ ] spdlog
 * [ ] openssl@3
 * [ ] cpp-httplib
+* [ ] brew to install clang-format
 
 ### Linux
 
@@ -43,9 +44,11 @@ The server requires cert.pem and key.pem files.
 * [x] fix logging to use spdlog
 * [x] add a shutdown uri /shutdown (delete method)
 * [x] remove brew from makefile for linux
-* [ ] add unit.hpp with help
+* [ ] refactor main to move all the service stuff to service.hpp
+* [ ] add unit.cpp with cli and help
+* [ ] implement tests with httplib https client
 * [ ] replace the cert/key file define with attrs in Config; add to CLI --cert <file> --key <file>
-* [ ] cmake? use AI to generate based on text from Makefile and cryptor.cpp
+* [ ] move the project to the starter template
 * [ ] error handling
 * [ ] refactor repo to put server at top level and html below
 

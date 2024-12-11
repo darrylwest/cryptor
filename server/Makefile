@@ -35,5 +35,9 @@ run:
 clean:
 	rm -f cryptor
 
+buildrun:
+	make clean && make && make run
+
+
 watch:
 	watchexec --debounce 500 --clear --postpone  --watch ../server --exts cpp,hpp,yaml make

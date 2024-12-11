@@ -14,10 +14,6 @@
 #include "logging.hpp"
 #include "version.hpp"
 
-// TODO : move this to Config
-#define SERVER_CERT_FILE "./cert.pem"
-#define SERVER_PRIVATE_KEY_FILE "./key.pem"
-
 int main(int argc, const char **argv) {
     using namespace httplib;
 
@@ -33,7 +29,7 @@ int main(int argc, const char **argv) {
         spdlog::info("Server Config : {}", config.to_string());
     }
 
-    SSLServer svr(SERVER_CERT_FILE, SERVER_PRIVATE_KEY_FILE);
+    SSLServer svr(config.cert_file.c_str(), config.key_file.c_str());
 
     if (svr.is_valid() == 0) {
         spdlog::error("ERROR! Server is not valid. Check the cert/key files? exiting...");
