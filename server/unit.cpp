@@ -11,7 +11,7 @@
 // the actual tests
 
 Results test_version() {
-    Results r = { .name = "CLI Tests" };
+    Results r = { .name = "Version Tests" };
 
     return r;
 }
