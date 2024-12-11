@@ -8,6 +8,8 @@
 #include <iostream>
 #include <cxxopts.hpp>
 
+#include "version.hpp"
+
 struct Config {
     std::string host = "0.0.0.0";
     int port = 2022;

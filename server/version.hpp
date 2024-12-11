@@ -11,9 +11,9 @@
 #include <iostream>
 #include <sstream>
 // #include <ansi_colors.hpp>
-#include <vector>
-#include <stdexcept>
 #include <algorithm>
+#include <stdexcept>
+#include <vector>
 
 /*
 #include <cstdlib>
@@ -30,11 +30,7 @@ struct Version {
 
     friend std::ostream& operator<<(std::ostream& os, const Version v) {
         // better to use <format> but it breaks on linux and fmt broken on darwin
-        os << v.major << "."
-            << v.minor << "."
-            << v.patch << "."
-            << v.build
-        ;
+        os << v.major << "." << v.minor << "." << v.patch << "." << v.build;
         return os;
     }
 
@@ -44,7 +40,6 @@ struct Version {
 
         return oss.str();
     }
-
 };
 
 #endif

@@ -2,8 +2,9 @@
 // 2024-12-10 15:45:20 dpw
 //
 #include <httplib.h>
-#include <iostream>
 #include <spdlog/spdlog.h>
+
+#include <iostream>
 
 void show_headers(const httplib::Headers &headers) {
     for (const auto &x : headers) {
@@ -29,4 +30,3 @@ void log_request(const httplib::Request &req, const httplib::Response &res) {
 
     show_headers(res.headers);
 }
-

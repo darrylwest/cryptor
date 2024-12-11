@@ -4,14 +4,15 @@
 // from the cpp-httplib examples folder
 //
 
-#include <cstdio>
 #include <httplib.h>
-#include <iostream>
 #include <spdlog/spdlog.h>
 
-#include "version.hpp"
+#include <cstdio>
+#include <iostream>
+
 #include "cli.hpp"
 #include "logging.hpp"
+#include "version.hpp"
 
 // TODO : move this to Config
 #define SERVER_CERT_FILE "./cert.pem"
@@ -24,7 +25,7 @@ int main(int argc, const char **argv) {
 
     std::string version = "Server Version: ";
     auto vers = Version();
-    
+
     version.append(vers.to_string());
 
     if (config.verbose > 0) {
@@ -44,13 +45,10 @@ int main(int argc, const char **argv) {
         const char *fmt = "<p>Error Status: <span style='color:red;'>%d</span></p>";
         char buf[BUFSIZ];
         snprintf(buf, sizeof(buf), fmt, res.status);
-        res.set_content(buf, "text/html"); 
+        res.set_content(buf, "text/html");
     });
 
-    svr.set_logger (
-        [](const Request &req, const Response &res) { 
-            log_request(req, res); 
-        });
+    svr.set_logger([](const Request &req, const Response &res) { log_request(req, res); });
 
     if (!svr.set_mount_point("/", config.base_dir)) {
         spdlog::error("ERROR! The specified base directory {} doesn't exist...", config.base_dir);
