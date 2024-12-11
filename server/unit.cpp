@@ -5,8 +5,10 @@
 #include <ansi_colors.hpp>
 
 #include "cli.hpp"
-#include "testlib.hpp"
+#include "logging.hpp"
 #include "version.hpp"
+#include "service.hpp"
+#include "testlib.hpp"
 
 // the actual tests
 
@@ -115,6 +117,12 @@ Results test_cli() {
     return r;
 }
 
+Results test_service() {
+    Results r = {.name = "HTTPS Service Tests"};
+
+    return r;
+}
+
 int main(int argc, char* argv[]) {
     std::cout << cyan << "Cryptor Server Tests, Version: " << yellow << Version() << reset << "\n"
               << std::endl;
@@ -131,6 +139,7 @@ int main(int argc, char* argv[]) {
 
     run_test(test_version);
     run_test(test_cli);
+    run_test(test_service);
 
     std::cout << "\n" << summary << std::endl;
     auto msg = (summary.failed == 0) ? green + "Ok" : "\n" + red + "Tests failed!";

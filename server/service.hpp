@@ -2,6 +2,9 @@
 // 2024-12-10 18:27:44 dpw
 //
 
+#ifndef SERVICE_INCLUDE
+#define SERVICE_INCLUDE
+
 #include <httplib.h>
 #include <spdlog/spdlog.h>
 
@@ -61,3 +64,4 @@ bool run_service(const Config& config) {
     return svr.listen(config.host, config.port);
 }
 
+#endif

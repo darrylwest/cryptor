@@ -34,7 +34,7 @@ cryptor: cryptor.cpp
 
 unit:
 	rm -f unit
-	$(CXX) -o unit $(CXXFLAGS) unit.cpp
+	$(CXX) -o unit $(CXXFLAGS) unit.cpp $(OPENSSL_SUPPORT) $(ZLIB_SUPPORT) $(BROTLI_SUPPORT)
 	./unit
 
 run:
