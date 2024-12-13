@@ -34,7 +34,7 @@ do
             shift
         ;;
         clean)
-            /bin/rm -f $root/bin/unit bin/cryptor
+            /bin/rm -f $root/bin/unit $root/bin/cryptor
         
             shift
         ;;

@@ -1,0 +1,84 @@
+can you help me create a valid CMakeFiles.txt file for my c++20 project? 
+My dependencies are spdlog, cxxopts, httplib, openssl@3, ziplib, and brotli.
+
+Additional project configurations include:
+
+The project's file structure looks like this:
+
+cryptor
+├── LICENSE
+├── README.md
+├── bin
+│   ├── cert.pem
+│   ├── cryptor
+│   ├── key.pem
+│   └── unit
+├── html
+│   ├── bg.jpg
+│   ├── favicon.png
+│   ├── help-1.mp3
+│   ├── help-2.mp3
+│   ├── help-3.mp3
+│   ├── help-4.mp3
+│   ├── help.html
+│   ├── index.html
+│   ├── license.html
+│   ├── secret-template.html
+│   ├── terms-of-use.html
+│   ├── values.js
+│   └── version.js
+├── include
+│   ├── cli.hpp
+│   ├── logging.hpp
+│   ├── service.hpp
+│   ├── testlib.hpp
+│   └── version.hpp
+├── mk
+└── src
+    ├── Makefile
+    ├── README.md
+    ├── cryptor.cpp
+    └── unit.cpp
+
+The Makefile that I use to compile the project from the src/ folder looks like this:
+
+PHONY: unit
+
+# CXX = clang++
+CXXFLAGS = -std=c++20 -I.. -Wall -Wextra -pthread
+
+# Conditionally define PREFIX only for macOS (Darwin)
+ifneq ($(OS), Windows_NT)
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S), Darwin)
+        PREFIX ?= $(shell brew --prefix)
+    endif
+endif
+
+OPENSSL_DIR = $(PREFIX)/opt/openssl@3
+OPENSSL_SUPPORT = -DCPPHTTPLIB_OPENSSL_SUPPORT -I$(OPENSSL_DIR)/include -L$(OPENSSL_DIR)/lib -lssl -lcrypto
+
+ifneq ($(OS), Windows_NT)
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S), Darwin)
+        OPENSSL_SUPPORT += -framework CoreFoundation -framework Security
+    endif
+endif
+
+ZLIB_SUPPORT = -DCPPHTTPLIB_ZLIB_SUPPORT -lz
+
+BROTLI_DIR = $(PREFIX)/opt/brotli
+BROTLI_SUPPORT = -DCPPHTTPLIB_BROTLI_SUPPORT -I$(BROTLI_DIR)/include -L$(BROTLI_DIR)/lib -lbrotlicommon -lbrotlienc -lbrotlidec
+
+all: cryptor
+
+cryptor: cryptor.cpp
+    $(CXX) -o ../bin/cryptor $(CXXFLAGS) cryptor.cpp $(OPENSSL_SUPPORT) $(ZLIB_SUPPORT) $(BROTLI_SUPPORT) -I../include
+
+unit:
+    $(CXX) -o ../bin/unit $(CXXFLAGS) unit.cpp $(OPENSSL_SUPPORT) $(ZLIB_SUPPORT) $(BROTLI_SUPPORT) -I../include
+
+The g++ command (from make) looks like this:
+
+g++ -o ../bin/cryptor -std=c++20 -I.. -Wall -Wextra -pthread cryptor.cpp -DCPPHTTPLIB_OPENSSL_SUPPORT -I/usr/local/opt/openssl@3/include -L/usr/local/opt/openssl@3/lib -lssl -lcrypto -framework CoreFoundation -framework Security -DCPPHTTPLIB_ZLIB_SUPPORT -lz -DCPPHTTPLIB_BROTLI_SUPPORT -I/usr/local/opt/brotli/include -L/usr/local/opt/brotli/lib -lbrotlicommon -lbrotlienc -lbrotlidec -I../include
+

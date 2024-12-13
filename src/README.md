@@ -26,6 +26,7 @@ or on the local dev machine, `make shutdown`
 * [x] refactor repo to put server at top level and html below
 * [ ] implement cmake files 
 * [ ] implement tests with httplib https client
+* [ ] add cryptor namespace
 * [ ] error handling
 * [ ] move this todo list to github issues
 * [ ] re-purpose this readme for programming notes
