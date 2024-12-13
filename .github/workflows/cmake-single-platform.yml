@@ -23,8 +23,7 @@ jobs:
       - name: Install spdlog and cxxopts
         run: |
           sudo apt-get update
-          sudo apt-get install -y libspdlog-dev
-          sudo apt-get install -y libcxxopts-dev
+          sudo apt-get install -y libspdlog-dev libcxxopts-dev libcpp-httplib-dev openssl
 
       - name: Build the project
         run: |
