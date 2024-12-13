@@ -16,26 +16,31 @@ do
     case $1 in
         build)
             clear
-            cd $root/src/ && make cryptor unit && cd
-            cd $root/bin/ && ./cryptor --version && ./unit
+            cmake --build build/ 
+            cd $root/build/ && ./cryptor --version
 
             shift
         ;;
         test)
             # TODO check that unit has been built and is newer that all the souces
-            cd $root/bin/ && ./unit
+            cd $root/build/ && ./unit
 
             shift
         ;;
         run)
             # TODO check that cryptor has been built and is newer that all the souces
-            cd $root/bin/ && ./cryptor --base ../html
+            cd $root/build/ && ./cryptor --base $root/html
 
             shift
         ;;
         clean)
-            /bin/rm -f $root/bin/unit $root/bin/cryptor
+            /bin/rm -f $root/build/cryptor $root/build/unit
         
+            shift
+        ;;
+        clobber)
+            /bin/rm -fr build/
+
             shift
         ;;
         watch)
@@ -56,12 +61,6 @@ do
             shift
         ;;
 
-        cmake-all)
-            /bin/rm -fr build/
-            cmake -Bbuild . && cmake --build build/ 
-
-            shift
-        ;;
 
         help)
             echo "Targets:"
@@ -71,6 +70,7 @@ do
             echo "   run     : runs the app and shows version"
             echo "   watch   : run watcher over source and include"
             echo "   clean   : remove binary builds"
+            echo "   clobber : remove the entire build folder"
             echo "   show    : runs curl against localhost to view index page"
             echo "   shutdown: runs localhost curl shutdown the server"
             echo "   help    : show this help"
