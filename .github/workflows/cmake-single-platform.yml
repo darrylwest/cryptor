@@ -24,8 +24,8 @@ jobs:
 
     - name: spdlog
       # install fmro atp-get
-      apt-get update
-      apt-get -y install libspdlog-dev
+      sudo apt-get update
+      sudo apt-get -y install libspdlog-dev
 
     - name: Configure CMake
       # error: can't find spdlog
