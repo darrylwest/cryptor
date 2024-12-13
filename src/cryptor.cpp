@@ -24,7 +24,7 @@ int main(const int argc, char **argv) {
         spdlog::info("Server Config : {}", config.to_string());
     }
 
-    auto ok = run_service(config);
+    auto ok = cryptor::run_service(config);
 
     spdlog::info("Server shutdown, code: {}...", ok);
 

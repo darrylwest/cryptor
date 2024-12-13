@@ -120,7 +120,7 @@ Results test_cli() {
 void test_default_service(Results& r) {
     auto config = Config();
     httplib::SSLServer svr(config.cert_file.c_str(), config.key_file.c_str());
-    auto ok = setup_service(svr, config);
+    auto ok = cryptor::setup_service(svr, config);
 
     r.equals(ok == true, "should create the default server");
 }
@@ -129,7 +129,7 @@ void test_bad_cert(Results& r) {
     auto config = Config();
     config.cert_file = "./no-file-here.pem";
     httplib::SSLServer svr(config.cert_file.c_str(), config.key_file.c_str());
-    auto ok = setup_service(svr, config);
+    auto ok = cryptor::setup_service(svr, config);
 
     r.equals(ok == false, "should fail with bad cert file server");
 }
@@ -138,7 +138,7 @@ void test_bad_key(Results& r) {
     auto config = Config();
     config.key_file = "./no-file-here.pem";
     httplib::SSLServer svr(config.cert_file.c_str(), config.key_file.c_str());
-    auto ok = setup_service(svr, config);
+    auto ok = cryptor::setup_service(svr, config);
 
     r.equals(ok == false, "should fail with bad cert file server");
 }
@@ -147,7 +147,7 @@ void test_bad_mount(Results& r) {
     auto config = Config();
     config.base_dir = "./no-file-here.pem";
     httplib::SSLServer svr(config.cert_file.c_str(), config.key_file.c_str());
-    auto ok = setup_service(svr, config);
+    auto ok = cryptor::setup_service(svr, config);
 
     r.equals(ok == false, "should fail with bad mount point server");
 }
