@@ -6,6 +6,7 @@
 
 set -eu
 
+port=2022
 
 # parse the cli
 while [[ $# -gt 0 ]]
@@ -17,7 +18,7 @@ do
             shift
         ;;
         run)
-            cd bin && ./cryptor
+            cd bin && ./cryptor --base ../html
 
             shift
         ;;
@@ -31,6 +32,12 @@ do
 
             shift
         ;;
+
+        shutdown)
+            curl -k -XDELETE https://localhost:$port/shutdown
+
+        ;;
+
         help)
             echo "Targets:"
             echo ""
