@@ -1,4 +1,6 @@
-
+#
+# NOTE! this has been replaced with cmake. it's retained here as an example without cmake
+#
 .PHONY: unit
 
 # CXX = clang++

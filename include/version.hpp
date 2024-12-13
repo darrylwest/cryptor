@@ -25,7 +25,7 @@ struct Version {
     int major = 2024;
     int minor = 12;
     int patch = 21;
-    int build = 118;
+    int build = 119;
 
     friend std::ostream& operator<<(std::ostream& os, const Version v) {
         // better to use <format> but it breaks on linux and fmt broken on darwin

@@ -14,16 +14,25 @@ port=2022
 while [[ $# -gt 0 ]]
 do
     case $1 in
+        init)
+            /bin/rm -fr build/
+            cmake -Bbuild .
+
+            shift
+        ;;
         build)
             clear
+
             cmake --build build/ 
-            cd $root/build/ && ./cryptor --version
+            $root/build/cryptor --version
+            # $root/build/unit --version
+
 
             shift
         ;;
         test)
             # TODO check that unit has been built and is newer that all the souces
-            cd $root/build/ && ./unit
+            $root/build/unit
 
             shift
         ;;
