@@ -22,11 +22,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: spdlog
+    - name: Install spdlog
       # install from atp-get
-      # no sudo?
-      run: sudo apt-get update
-      run: sudo apt-get -y install libspdlog-dev
+      # trying with sudo
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install libspdlog-dev
 
     - name: Configure CMake
       # error: can't find spdlog
