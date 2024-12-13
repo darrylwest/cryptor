@@ -21,11 +21,14 @@ or on the local dev machine, `make shutdown`
 * [x] replace the cert/key file define with attrs in Config; 
 * [x] add CLI --cert <file> --key <file>
 * [x] add unit.cpp with cli and help
+* [x] refactor main to move all the service stuff to service.hpp
+* [x] move the project to the starter template (bad)
+* [x] refactor repo to put server at top level and html below
+* [ ] implement cmake files 
 * [ ] implement tests with httplib https client
-* [ ] refactor main to move all the service stuff to service.hpp
-* [ ] move the project to the starter template
 * [ ] error handling
-* [ ] refactor repo to put server at top level and html below
+* [ ] move this todo list to github issues
+* [ ] re-purpose this readme for programming notes
 
 
-###### 2024.12.12 | dpw
+###### 2024.12.13 | dpw
