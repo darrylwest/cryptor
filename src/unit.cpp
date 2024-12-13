@@ -44,8 +44,8 @@ void test_default_config(Results& r) {
     r.equals(cfg.host == "0.0.0.0", "the default host assignment");
     r.equals(cfg.base_dir == "./", "the default base dir assignment");
     r.equals(cfg.verbose == 1, "the default verbose assignment");
-    r.equals(cfg.cert_file == "./cert.pem", "the default cert file assignment");
-    r.equals(cfg.key_file == "./key.pem", "the default key file assignment");
+    r.equals(cfg.cert_file == "./.ssh/cert.pem", "the default cert file assignment");
+    r.equals(cfg.key_file == "./.ssh/key.pem", "the default key file assignment");
 }
 
 void test_port(Results& r) {
@@ -58,8 +58,8 @@ void test_port(Results& r) {
     r.equals(cfg.host == "0.0.0.0", "the default host assignment");
     r.equals(cfg.base_dir == "./", "the default base dir assignment");
     r.equals(cfg.verbose == 1, "the default verbose assignment");
-    r.equals(cfg.cert_file == "./cert.pem", "the default cert file assignment");
-    r.equals(cfg.key_file == "./key.pem", "the default key file assignment");
+    r.equals(cfg.cert_file == "./.ssh/cert.pem", "the default cert file assignment");
+    r.equals(cfg.key_file == "./.ssh/key.pem", "the default key file assignment");
 }
 
 void test_host(Results& r) {
@@ -71,8 +71,8 @@ void test_host(Results& r) {
     r.equals(cfg.port == 2022, "the default port assignment");
     r.equals(cfg.base_dir == "./", "the default base dir assignment");
     r.equals(cfg.verbose == 1, "the default verbose assignment");
-    r.equals(cfg.cert_file == "./cert.pem", "the default cert file assignment");
-    r.equals(cfg.key_file == "./key.pem", "the default key file assignment");
+    r.equals(cfg.cert_file == "./.ssh/cert.pem", "the default cert file assignment");
+    r.equals(cfg.key_file == "./.ssh/key.pem", "the default key file assignment");
 }
 
 void test_base(Results& r) {
@@ -85,8 +85,8 @@ void test_base(Results& r) {
     r.equals(cfg.port == 2022, "the default port assignment");
     r.equals(cfg.host == "0.0.0.0", "the default host assignment");
     r.equals(cfg.verbose == 1, "the default verbose assignment");
-    r.equals(cfg.cert_file == "./cert.pem", "the default cert file assignment");
-    r.equals(cfg.key_file == "./key.pem", "the default key file assignment");
+    r.equals(cfg.cert_file == "./.ssh/cert.pem", "the default cert file assignment");
+    r.equals(cfg.key_file == "./.ssh/key.pem", "the default key file assignment");
 }
 
 void test_cert_key(Results& r) {

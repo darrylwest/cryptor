@@ -25,7 +25,7 @@ do
 
             cmake --build build/ 
             $root/build/cryptor --version
-            # $root/build/unit --version
+            $root/build/unit
 
 
             shift
