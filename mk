@@ -6,12 +6,13 @@
 
 set -eu
 
+
 # parse the cli
 while [[ $# -gt 0 ]]
 do
     case $1 in
         clean)
-            /bin/rm -f bin/*
+            /bin/rm -f bin/unit bin/cryptor
         
             shift
         ;;
@@ -26,7 +27,7 @@ do
             exit 0
         ;;
         test)
-            ./bin/unit
+            cd src && pwd && make unit && ./bin/unit
 
             shift
         ;;
@@ -42,8 +43,8 @@ do
             exit 0
         ;;
 
-        *)
-            cd src && make
+        build)
+            cd src && pwd && make
 
             shift
         ;;

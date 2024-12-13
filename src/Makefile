@@ -35,13 +35,13 @@ cryptor: cryptor.cpp
 unit:
 	rm -f unit
 	$(CXX) -o ../bin/unit $(CXXFLAGS) unit.cpp $(OPENSSL_SUPPORT) $(ZLIB_SUPPORT) $(BROTLI_SUPPORT) -I../include
-	./unit
+	../bin/unit
 
 run:
-	./cryptor --base ../html
+	../bin/cryptor --base ../html
 
 clean:
-	rm -f cryptor unit
+	rm bin/*
 
 buildrun:
 	make clean && make && make run
