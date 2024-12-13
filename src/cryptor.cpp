@@ -2,6 +2,7 @@
 //  cryptor main
 //
 
+#include <spdlog/spdlog.h>
 
 #include "cli.hpp"
 #include "logging.hpp"

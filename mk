@@ -6,31 +6,42 @@
 
 set -eu
 
+export root=`pwd`
+
 port=2022
 
 # parse the cli
 while [[ $# -gt 0 ]]
 do
     case $1 in
-        clean)
-            /bin/rm -f bin/unit bin/cryptor
-        
+        build)
+            clear
+            cd $root/src/ && make cryptor unit && cd
+            cd $root/bin/ && ./cryptor --version && ./unit
+
+            shift
+        ;;
+        test)
+            # TODO check that unit has been built and is newer that all the souces
+            cd $root/bin/ && ./unit
+
             shift
         ;;
         run)
-            cd bin && ./cryptor --base ../html
+            # TODO check that cryptor has been built and is newer that all the souces
+            cd $root/bin/ && ./cryptor --base ../html
 
+            shift
+        ;;
+        clean)
+            /bin/rm -f $root/bin/unit bin/cryptor
+        
             shift
         ;;
         watch)
-            watchexec -c -w src/ -w include/ -e h,hpp,cpp ./mk test
+            watchexec -c -w src/ -w include/ -e h,hpp,cpp ./mk build
 
             exit 0
-        ;;
-        test)
-            cd bin/ && ./unit
-
-            shift
         ;;
 
         shutdown)
@@ -39,7 +50,7 @@ do
             shift
         ;;
 
-        show_page)
+        page)
             curl -k https://localhost:$port
 
             shift
@@ -48,11 +59,13 @@ do
         help)
             echo "Targets:"
             echo ""
-            echo "   build   : compile cryptor and unit tests"
+            echo "   build   : compile and run cryptor and unit tests"
             echo "   test    : run all tests"
             echo "   run     : runs the app and shows version"
             echo "   watch   : run watcher over source and include"
             echo "   clean   : remove binary builds"
+            echo "   show    : runs curl against localhost to view index page"
+            echo "   shutdown: runs localhost curl shutdown the server"
             echo "   help    : show this help"
             
             exit 0

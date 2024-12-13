@@ -28,4 +28,12 @@ The server requires cert.pem and key.pem files.
 
 ## Basic Use
 
-###### 2024.12.12 | dpw
+### Run the applicaton
+
+_TBD_
+
+### Run the unit tests
+
+_TBD_
+
+###### 2024.12.13 | dpw
