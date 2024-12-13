@@ -36,6 +36,13 @@ do
         shutdown)
             curl -k -XDELETE https://localhost:$port/shutdown
 
+            shift
+        ;;
+
+        show_page)
+            curl -k https://localhost:$port
+
+            shift
         ;;
 
         help)
@@ -55,6 +62,10 @@ do
             cd src && pwd && make && make unit
 
             shift
+        ;;
+        *)
+            ./mk help
+            exit 0
         ;;
 
     esac
