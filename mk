@@ -17,8 +17,7 @@ do
             shift
         ;;
         run)
-            cd bin
-            ./cryptor
+            cd bin && ./cryptor
 
             shift
         ;;
@@ -28,14 +27,15 @@ do
             exit 0
         ;;
         test)
-            cd src && make unit && cd ../bin && ./unit
+            cd bin/ && ./unit
 
             shift
         ;;
         help)
             echo "Targets:"
             echo ""
-            echo "   test    : compile and run all tests"
+            echo "   build   : compile cryptor and unit tests"
+            echo "   test    : run all tests"
             echo "   run     : runs the app and shows version"
             echo "   watch   : run watcher over source and include"
             echo "   clean   : remove binary builds"
@@ -45,10 +45,11 @@ do
         ;;
 
         build)
-            cd src && pwd && make
+            cd src && pwd && make && make unit
 
             shift
         ;;
+
     esac
 done
 
