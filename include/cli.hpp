@@ -59,7 +59,7 @@ Config parse_cli(const int argc, char** argv) {
             ;
 
         // clang-format on
-        const auto version = Version();
+        const auto version = cryptor::Version();
         const auto result = options.parse(argc, argv);
         if (result.count("version")) {
             std::cout << "Server Version: " << version << std::endl;

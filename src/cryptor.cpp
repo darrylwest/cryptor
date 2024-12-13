@@ -15,7 +15,7 @@ int main(const int argc, char **argv) {
     const auto config = parse_cli(argc, argv);
 
     std::string version = "Server Version: ";
-    auto vers = Version();
+    auto vers = cryptor::Version();
 
     version.append(vers.to_string());
 

@@ -14,31 +14,29 @@
 #include <stdexcept>
 #include <vector>
 
-/*
-#include <cstdlib>
-#include <chrono>
-#include <thread>
-*/
+namespace cryptor {
 
-// version numbers are year.month.day.build where the year/month/day is the release date
-struct Version {
-    int major = 2024;
-    int minor = 12;
-    int patch = 21;
-    int build = 119;
+    // version numbers are year.month.day.build where the year/month/day is the release date
+    struct Version {
+        int major = 2024;
+        int minor = 12;
+        int patch = 21;
+        int build = 120;
 
-    friend std::ostream& operator<<(std::ostream& os, const Version v) {
-        // better to use <format> but it breaks on linux and fmt broken on darwin
-        os << v.major << "." << v.minor << "." << v.patch << "." << v.build;
-        return os;
-    }
+        friend std::ostream& operator<<(std::ostream& os, const Version v) {
+            // better to use <format> but it breaks on linux and fmt broken on darwin
+            os << v.major << "." << v.minor << "." << v.patch << "." << v.build;
+            return os;
+        }
 
-    std::string to_string() const {
-        std::ostringstream oss;
-        oss << *this;
+        std::string to_string() const {
+            std::ostringstream oss;
+            oss << *this;
 
-        return oss.str();
-    }
-};
+            return oss.str();
+        }
+    };
+
+} // namespace
 
 #endif

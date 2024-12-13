@@ -15,6 +15,12 @@
 Results test_version() {
     Results r = {.name = "Version Tests"};
 
+    auto vers = cryptor::Version();
+    r.equals(vers.major == 2024);
+    r.equals(vers.minor == 12);
+    r.equals(vers.patch == 21);
+    r.equals(vers.build > 119);
+
     return r;
 }
 
@@ -166,7 +172,7 @@ Results test_service() {
 int main(int argc, char* argv[]) {
     spdlog::set_level(spdlog::level::off);
 
-    std::cout << cyan << "Cryptor Server Tests, Version: " << yellow << Version() << reset << "\n"
+    std::cout << cyan << "Cryptor Server Tests, Version: " << yellow << cryptor::Version() << reset << "\n"
               << std::endl;
     std::vector<std::string> args(argv, argv + argc);
 
