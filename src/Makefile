@@ -33,18 +33,10 @@ cryptor: cryptor.cpp
 	$(CXX) -o ../bin/cryptor $(CXXFLAGS) cryptor.cpp $(OPENSSL_SUPPORT) $(ZLIB_SUPPORT) $(BROTLI_SUPPORT) -I../include
 
 unit:
-	rm -f unit
 	$(CXX) -o ../bin/unit $(CXXFLAGS) unit.cpp $(OPENSSL_SUPPORT) $(ZLIB_SUPPORT) $(BROTLI_SUPPORT) -I../include
-	../bin/unit
-
-run:
-	../bin/cryptor --base ../html
 
 clean:
 	rm bin/*
-
-buildrun:
-	make clean && make && make run
 
 page:
 	curl -k https://localhost:2022/

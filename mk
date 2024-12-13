@@ -17,7 +17,8 @@ do
             shift
         ;;
         run)
-            ./bin/cryptor
+            cd bin
+            ./cryptor
 
             shift
         ;;
@@ -27,7 +28,7 @@ do
             exit 0
         ;;
         test)
-            cd src && pwd && make unit && ./bin/unit
+            cd src && make unit && cd ../bin && ./unit
 
             shift
         ;;
