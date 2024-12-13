@@ -11,24 +11,22 @@ while [[ $# -gt 0 ]]
 do
     case $1 in
         clean)
-            cmake --build build --target clean
+            /bin/rm -f bin/*
         
             shift
         ;;
         run)
-            cmake --build build
-            ./build/standalone/${PROJECT} --version
+            ./bin/cryptor
 
             shift
         ;;
         watch)
-            watchexec -c -w standalone/source -w source/ -w test/source/ -w include/ -e h,hpp,cpp ./mk test
+            watchexec -c -w src/ -w include/ -e h,hpp,cpp ./mk test
 
             exit 0
         ;;
         test)
-            cmake --build build/test
-            ./build/test/${PROJECT}Tests
+            ./bin/unit
 
             shift
         ;;
@@ -45,7 +43,7 @@ do
         ;;
 
         *)
-            cmake --build build
+            cd src && make
 
             shift
         ;;
