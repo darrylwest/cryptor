@@ -44,7 +44,7 @@ std::pair<int, char**> build_args(const std::vector<std::string>& vargs) {
 void test_default_config(Results& r) {
     const std::vector<std::string> args = {"test"};
     auto [argc, argv] = build_args(args);
-    auto cfg = parse_cli(argc, argv);
+    auto cfg = cryptor::parse_cli(argc, argv);
 
     r.equals(cfg.port == 2022, "the default port assignment");
     r.equals(cfg.host == "0.0.0.0", "the default host assignment");
@@ -57,7 +57,7 @@ void test_default_config(Results& r) {
 void test_port(Results& r) {
     const std::vector<std::string> args = {"test", "-p", "2500"};
     auto [argc, argv] = build_args(args);
-    auto cfg = parse_cli(argc, argv);
+    auto cfg = cryptor::parse_cli(argc, argv);
 
     r.equals(cfg.port == 2500, "the port assignment");
 
@@ -71,7 +71,7 @@ void test_port(Results& r) {
 void test_host(Results& r) {
     const std::vector<std::string> args = {"test", "--host", "1.1.1.1"};
     auto [argc, argv] = build_args(args);
-    auto cfg = parse_cli(argc, argv);
+    auto cfg = cryptor::parse_cli(argc, argv);
 
     r.equals(cfg.host == "1.1.1.1", "the host assignment");
     r.equals(cfg.port == 2022, "the default port assignment");
@@ -85,7 +85,7 @@ void test_base(Results& r) {
     auto base = "/www/home";
     const std::vector<std::string> args = {"test", "--base", base};
     auto [argc, argv] = build_args(args);
-    auto cfg = parse_cli(argc, argv);
+    auto cfg = cryptor::parse_cli(argc, argv);
 
     r.equals(cfg.base_dir == base, "the base assignment");
     r.equals(cfg.port == 2022, "the default port assignment");
@@ -101,7 +101,7 @@ void test_cert_key(Results& r) {
 
     const std::vector<std::string> args = {"test", "--cert", cert, "--key", key};
     auto [argc, argv] = build_args(args);
-    auto cfg = parse_cli(argc, argv);
+    auto cfg = cryptor::parse_cli(argc, argv);
 
     r.equals(cfg.cert_file == cert, "the cert file assignment");
     r.equals(cfg.key_file == key, "the key file assignment");
@@ -124,7 +124,7 @@ Results test_cli() {
 }
 
 void test_default_service(Results& r) {
-    auto config = Config();
+    auto config = cryptor::Config();
     httplib::SSLServer svr(config.cert_file.c_str(), config.key_file.c_str());
     auto ok = cryptor::setup_service(svr, config);
 
@@ -132,7 +132,7 @@ void test_default_service(Results& r) {
 }
 
 void test_bad_cert(Results& r) {
-    auto config = Config();
+    auto config = cryptor::Config();
     config.cert_file = "./no-file-here.pem";
     httplib::SSLServer svr(config.cert_file.c_str(), config.key_file.c_str());
     auto ok = cryptor::setup_service(svr, config);
@@ -141,7 +141,7 @@ void test_bad_cert(Results& r) {
 }
 
 void test_bad_key(Results& r) {
-    auto config = Config();
+    auto config = cryptor::Config();
     config.key_file = "./no-file-here.pem";
     httplib::SSLServer svr(config.cert_file.c_str(), config.key_file.c_str());
     auto ok = cryptor::setup_service(svr, config);
@@ -150,7 +150,7 @@ void test_bad_key(Results& r) {
 }
 
 void test_bad_mount(Results& r) {
-    auto config = Config();
+    auto config = cryptor::Config();
     config.base_dir = "./no-file-here.pem";
     httplib::SSLServer svr(config.cert_file.c_str(), config.key_file.c_str());
     auto ok = cryptor::setup_service(svr, config);

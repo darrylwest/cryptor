@@ -12,7 +12,7 @@
 int main(const int argc, char **argv) {
     using namespace httplib;
 
-    const auto config = parse_cli(argc, argv);
+    const auto config = cryptor::parse_cli(argc, argv);
 
     std::string version = "Server Version: ";
     auto vers = cryptor::Version();
