@@ -38,7 +38,7 @@ do
         ;;
         run)
             # TODO check that cryptor has been built and is newer that all the souces
-            cd $root/build/ && ./cryptor --base $root/html
+            $root/build/cryptor --base $root/html
 
             shift
         ;;
