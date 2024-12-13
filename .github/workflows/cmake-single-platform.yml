@@ -20,9 +20,10 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install spdlog
+      - name: Install spdlog and cxxopts
         run: |
           sudo apt-get update
+          sudo apt-get install -y libspdlog-dev
           sudo apt-get install -y libspdlog-dev
 
       - name: Build the project
