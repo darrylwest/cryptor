@@ -1,10 +1,5 @@
 # Cryptor Server
 
-## Basic Use
-
-### License
-
-_TBD_
 
 ### Shutdown Hook
 
@@ -13,29 +8,6 @@ curl -k -XDELETE https://<host>:<port>/shutdown
 or on the local dev machine, `make shutdown`
 
 ## cpp-httplib
-
-
-## Installation Instructions
-
-The server requires cert.pem and key.pem files.
-
-### Mac (Intel and ATOM)
-
-* [ ] Intel: macOS Sonoma Version 14.6
-* [ ] ATOM: macOS Sequoia Version 15.1
-* [ ] brew (to install openssl@3)
-* [ ] clang++ Apple clang version 16.0.0 (clang-1600.0.26.4)
-* [ ] spdlog
-* [ ] openssl@3
-* [ ] cpp-httplib
-* [ ] brew to install clang-format
-
-### Linux
-
-* [ ] g++ version 11.
-* [ ] spdlog (complied with make install)
-* [ ] openssl@3
-* [ ] cpp-httplib
 
 ## To Do
 
@@ -56,4 +28,4 @@ The server requires cert.pem and key.pem files.
 * [ ] refactor repo to put server at top level and html below
 
 
-###### 2024.12.10 | dpw
+###### 2024.12.12 | dpw
