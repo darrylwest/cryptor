@@ -29,6 +29,7 @@ include_directories(${INCLUDE_DIR})
 # Find dependencies
 find_package(OpenSSL REQUIRED)
 find_package(ZLIB REQUIRED)
+find_package(spdlog REQUIRED)
 
 # Brotli (assumes it is installed using Homebrew or similar package manager)
 find_path(BROTLI_INCLUDE_DIR brotli)
@@ -45,6 +46,7 @@ set(DEPENDENT_LIBRARIES
     OpenSSL::SSL
     OpenSSL::Crypto
     ZLIB::ZLIB
+    spdlog::spdlog
     ${BROTLI_COMMON_LIBRARY}
     ${BROTLI_ENC_LIBRARY}
     ${BROTLI_DEC_LIBRARY}

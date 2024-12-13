@@ -56,6 +56,13 @@ do
             shift
         ;;
 
+        cmake-all)
+            /bin/rm -fr build/
+            cmake -Bbuild . && cmake --build build/ 
+
+            shift
+        ;;
+
         help)
             echo "Targets:"
             echo ""
