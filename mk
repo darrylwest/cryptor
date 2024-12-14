@@ -69,6 +69,11 @@ do
 
             shift
         ;;
+        version)
+            curl -k https://localhost:$port/version
+
+            shift
+        ;;
 
 
         help)

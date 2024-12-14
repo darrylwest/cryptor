@@ -18,6 +18,13 @@ int main(int argc, char* argv[]) {
     std::cout << cyan << msg << yellow << cryptor::Version() << reset << "\n" << std::endl;
     // std::vector<std::string> args(argv, argv + argc);
 
+    // here is what the tests should do
+    // 1. start the cryptor server (may have to stop first, with shutdown)
+    // 2. request the server version and verify
+    // 3. request the index page and inspect key elements
+    // 4. request help page and verify
+    // 5. shutdown the service
+
     return 0;
 
 }

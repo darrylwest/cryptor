@@ -48,6 +48,12 @@ namespace cryptor {
             svr.stop();
         });
 
+        svr.Get("/version", [](const Request &, Response &res) {
+            auto vers = cryptor::Version().to_string();
+            res.set_content(vers, "text/plain");
+            spdlog::info("Version Request: {}", vers);
+        });
+
         return true;
     }
 
