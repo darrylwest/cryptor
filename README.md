@@ -13,8 +13,8 @@ locally reduces the risk of phishing attacts.
 
 ### Docker
 
-The easies way to run the service without having to compile is by running the pre-compiled docker image.  It
-does require running docker.
+The easiest way to run Cryptor service without having to compile is by running the pre-compiled docker image.  It
+does require running [docker](https://hub.docker.com/).
 
 
 ### Mac (Intel and ATOM)
@@ -36,6 +36,14 @@ does require running docker.
 * [ ] spdlog (complied with make install)
 * [ ] openssl@3
 * [ ] cpp-httplib
+
+Here is an install script that should work on Debian 12 or Umbutu 22:
+
+```
+sudo apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y libspdlog-dev libcxxopts-dev libcpp-httplib-dev openssl spdlog cxxopts
+```
 
 ## Basic Use
 
