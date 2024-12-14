@@ -11,7 +11,11 @@ locally reduces the risk of phishing attacts.
 
 ## Installation Instructions
 
-The server requires cert.pem and key.pem files.  You can create them using openssl.
+### Docker
+
+The easies way to run the service without having to compile is by running the pre-compiled docker image.  It
+does require running docker.
+
 
 ### Mac (Intel and ATOM)
 
@@ -35,6 +39,8 @@ The server requires cert.pem and key.pem files.  You can create them using opens
 
 ## Basic Use
 
+The server requires cert.pem and key.pem files to enable TLS.  You can create them using openssl.
+
 ### Run the applicaton
 
 _TBD_
@@ -43,4 +49,8 @@ _TBD_
 
 _TBD_
 
-###### 2024.12.13 | dpw
+## Reporting Issues
+
+A list of issues is available in the crypto repo.
+
+###### 2024.12.14 | dpw
