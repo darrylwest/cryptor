@@ -20,7 +20,7 @@ int main(const int argc, char **argv) {
     version.append(vers.to_string());
 
     if (config.verbose > 0) {
-        spdlog::info("Server Version: {}", version);
+        spdlog::info("{}", version);
         spdlog::info("Server Config : {}", config.to_string());
     }
 

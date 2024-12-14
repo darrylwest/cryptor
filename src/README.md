@@ -26,11 +26,11 @@ or on the local dev machine, `make shutdown`
 * [x] refactor repo to put server at top level and html below
 * [x] implement cmake files 
 * [x] add cryptor namespace
-* [ ] implement tests with httplib https client
+* [x] implement tests with httplib https client
 * [ ] error handling
-* [ ] move this todo list to github issues
+* [x] move this todo list to github issues
 * [ ] re-purpose this readme for programming notes 
 * [ ] remove the src/Makefile?
 
 
-###### 2024.12.13 | dpw
+###### 2024.12.14 | dpw
