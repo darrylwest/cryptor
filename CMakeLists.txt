@@ -77,10 +77,12 @@ add_definitions(
 # Add executable targets
 add_executable(cryptor ${SRC_DIR}/cryptor.cpp)
 add_executable(unit ${SRC_DIR}/unit.cpp)
+add_executable(integration ${SRC_DIR}/integration.cpp)
 
 # Link libraries to executables
 target_link_libraries(cryptor PRIVATE ${DEPENDENT_LIBRARIES})
 target_link_libraries(unit PRIVATE ${DEPENDENT_LIBRARIES})
+target_link_libraries(integration ${DEPENDENT_LIBRARIES})
 
 # Installation rules
-install(TARGETS cryptor unit DESTINATION ${BIN_DIR})
+install(TARGETS cryptor unit integration DESTINATION ${BIN_DIR})

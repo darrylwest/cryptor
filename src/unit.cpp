@@ -170,11 +170,12 @@ Results test_service() {
 }
 
 int main(int argc, char* argv[]) {
+    using namespace colors;
     spdlog::set_level(spdlog::level::off);
 
-    std::cout << cyan << "Cryptor Server Tests, Version: " << yellow << cryptor::Version() << reset << "\n"
-              << std::endl;
-    std::vector<std::string> args(argv, argv + argc);
+    auto msg = std::string("Cryptor Server Unit Tests, Version: ");
+    std::cout << cyan << msg << yellow << cryptor::Version() << reset << "\n" << std::endl;
+    // std::vector<std::string> args(argv, argv + argc);
 
     Results summary = Results{.name = "Unit Test Summary"};
 
@@ -190,7 +191,7 @@ int main(int argc, char* argv[]) {
     run_test(test_service);
 
     std::cout << "\n" << summary << std::endl;
-    auto msg = (summary.failed == 0) ? green + "Ok" : "\n" + red + "Tests failed!";
+    msg = (summary.failed == 0) ? green + "Ok" : "\n" + red + "Tests failed!";
     std::cout << cyan << "\nUnit Test Results: " << msg << reset << std::endl;
 
     return 0;
