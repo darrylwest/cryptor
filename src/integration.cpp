@@ -19,11 +19,12 @@ int main(int argc, char* argv[]) {
     // std::vector<std::string> args(argv, argv + argc);
 
     // here is what the tests should do
-    // 1. start the cryptor server (may have to stop first, with shutdown)
+    // 1. start the cryptor server on separate thread on test port 22022
     // 2. request the server version and verify
     // 3. request the index page and inspect key elements
     // 4. request help page and verify
-    // 5. shutdown the service
+    // 5. request the version.js file and verify
+    // x. shutdown the service
 
     return 0;
 
