@@ -7,6 +7,7 @@
 
 #include <cxxopts.hpp>
 #include <iostream>
+#include <spdlog/spdlog.h>
 
 #include "version.hpp"
 
@@ -92,6 +93,30 @@ namespace cryptor {
 
             if (result.count("key")) {
                 config.key_file = result["key"].as<std::string>();
+            }
+
+            if (result.count("level")) {
+                auto level = result["level"].as<int>();
+                switch (level) {
+                case 0:
+                    spdlog::set_level(spdlog::level::debug);
+                    break;
+                case 2:
+                    spdlog::set_level(spdlog::level::warn);
+                    break;
+                case 3:
+                    spdlog::set_level(spdlog::level::err);
+                    break;
+                case 4:
+                    spdlog::set_level(spdlog::level::critical);
+                    break;
+                case 5:
+                    spdlog::set_level(spdlog::level::off);
+                    break;
+                default:
+                    spdlog::set_level(spdlog::level::info);
+                    break;
+                }
             }
 
         } catch (const cxxopts::OptionException& e) {

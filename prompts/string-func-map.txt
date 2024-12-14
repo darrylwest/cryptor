@@ -1,0 +1,2 @@
+can you give me an example of use a std::map<std::string, function> to enable invoking a function base on a string name? like for a calculator "add", "sub", "mul", "div" ?
+

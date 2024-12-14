@@ -42,6 +42,12 @@ do
 
             shift
         ;;
+        run-debug)
+            # TODO check that cryptor has been built and is newer that all the souces
+            $root/build/cryptor --base $root/html --level 0
+
+            shift
+        ;;
         clean)
             /bin/rm -f $root/build/cryptor $root/build/unit
         
@@ -79,15 +85,16 @@ do
         help)
             echo "Targets:"
             echo ""
-            echo "   build   : compile and run cryptor and unit tests"
-            echo "   test    : run all tests"
-            echo "   run     : runs the app and shows version"
-            echo "   watch   : run watcher over source and include"
-            echo "   clean   : remove binary builds"
-            echo "   clobber : remove the entire build folder"
-            echo "   show    : runs curl against localhost to view index page"
-            echo "   shutdown: runs localhost curl shutdown the server"
-            echo "   help    : show this help"
+            echo "   build    : compile and run cryptor and unit tests"
+            echo "   test     : run all tests"
+            echo "   run      : runs the app and shows version"
+            echo "   run-debug: runs the service with logging set to debug"
+            echo "   watch    : run watcher over source and include"
+            echo "   clean    : remove binary builds"
+            echo "   clobber  : remove the entire build folder"
+            echo "   show     : runs curl against localhost to view index page"
+            echo "   shutdown : runs localhost curl shutdown the server"
+            echo "   help     : show this help"
             
             exit 0
         ;;

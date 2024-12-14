@@ -1,0 +1,10 @@
+Can you help me write integration tests for a c++20 server project based on cpp-httplib? The test
+should do the following:
+
+1. start the service in a separate thread
+2. request the serivce version by making a GET request to https://localhost:22022/version; verify the version string response
+3. request the index page with GET https://localhost:22022/version; verify the <title> tag in the page
+4. stop the service with a DELETE request https://localhost:22022/shutdown
+5. verify that the service thread has stopped
+
+For now the values, endpoints, etc can be hard-coded.  I can changes them after the basics are complete.

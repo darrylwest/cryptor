@@ -1,0 +1,58 @@
+// Gemini response
+
+#include <iostream>
+#include <map>
+#include <functional>
+
+using namespace std;
+
+int add(int a, int b) {
+    return a + b;
+}
+
+int subtract(int a, int b) {
+    return a - b;
+}
+
+int multiply(int a, int b) {
+    return a * b;
+}
+
+int divide(int a, int b) {
+    if (b == 0) {
+        throw runtime_error("Division by zero");
+    }
+    return a / b;
+}
+
+int main() {
+    map<string, function<int(int, int)>> operations = {
+        {"add", add},
+        {"subtract", subtract},
+        {"multiply", multiply},
+        {"divide", divide}
+    };
+
+    string operation;
+    int a, b;
+
+    cout << "Enter the operation (+, -, *, /): ";
+    cin >> operation;
+
+    cout << "Enter two numbers: ";
+    cin >> a >> b;
+
+    try {
+        auto it = operations.find(operation);
+        if (it != operations.end()) {
+            int result = it->second(a, b);
+            cout << "Result: " << result << endl;
+        } else {
+            cout << "Invalid operation" << endl;
+        }
+    } catch (const runtime_error& e) {
+        cout << "Error: " << e.what() << endl;
+    }
+
+    return 0;
+}
