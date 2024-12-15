@@ -3,7 +3,7 @@
 #
 FROM debian:bookworm
 
-LABEL maintainer="darryl.west" version="2024.12.14"
+LABEL maintainer="darryl.west" version="2024.12.15"
 
 RUN apt-get update && apt-get install -y \
     make binutils autoconf automake autotools-dev libtool pkg-config cmake \
@@ -16,5 +16,5 @@ ADD install.tgz /
 
 WORKDIR /home/cryptor
 
-CMD [ "/usr/local/bin/cryptor", "--base /home/cryptor/www", "--port 29200" ]
+CMD [ "/usr/local/bin/cryptor", "--base", "/home/cryptor/www", "--port", "29200" ]
 # CMD [ "/usr/bin/sleep", "600d" ]
