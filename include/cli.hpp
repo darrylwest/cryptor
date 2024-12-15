@@ -5,9 +5,10 @@
 #ifndef CLI_INCLUDE
 #define CLI_INCLUDE
 
+#include <spdlog/spdlog.h>
+
 #include <cxxopts.hpp>
 #include <iostream>
-#include <spdlog/spdlog.h>
 
 #include "version.hpp"
 
@@ -24,11 +25,11 @@ namespace cryptor {
         friend std::ostream& operator<<(std::ostream& os, const Config v) {
             // better to use <format> but it breaks on linux and fmt broken on darwin
             os << "host: " << v.host << ", "
-            << "port: " << v.port << ", "
-            << "base: " << v.base_dir << ", "
-            << "cert: " << v.cert_file << ", "
-            << "key : " << v.key_file << ", "
-            << "verbose: " << v.verbose << ".";
+               << "port: " << v.port << ", "
+               << "base: " << v.base_dir << ", "
+               << "cert: " << v.cert_file << ", "
+               << "key : " << v.key_file << ", "
+               << "verbose: " << v.verbose << ".";
             return os;
         }
 
@@ -41,8 +42,8 @@ namespace cryptor {
     };
 
     /*
-    * parse the command line
-    */
+     * parse the command line
+     */
     Config parse_cli(const int argc, char** argv) {
         auto config = Config();
 
@@ -98,24 +99,24 @@ namespace cryptor {
             if (result.count("level")) {
                 auto level = result["level"].as<int>();
                 switch (level) {
-                case 0:
-                    spdlog::set_level(spdlog::level::debug);
-                    break;
-                case 2:
-                    spdlog::set_level(spdlog::level::warn);
-                    break;
-                case 3:
-                    spdlog::set_level(spdlog::level::err);
-                    break;
-                case 4:
-                    spdlog::set_level(spdlog::level::critical);
-                    break;
-                case 5:
-                    spdlog::set_level(spdlog::level::off);
-                    break;
-                default:
-                    spdlog::set_level(spdlog::level::info);
-                    break;
+                    case 0:
+                        spdlog::set_level(spdlog::level::debug);
+                        break;
+                    case 2:
+                        spdlog::set_level(spdlog::level::warn);
+                        break;
+                    case 3:
+                        spdlog::set_level(spdlog::level::err);
+                        break;
+                    case 4:
+                        spdlog::set_level(spdlog::level::critical);
+                        break;
+                    case 5:
+                        spdlog::set_level(spdlog::level::off);
+                        break;
+                    default:
+                        spdlog::set_level(spdlog::level::info);
+                        break;
                 }
             }
 
@@ -126,6 +127,6 @@ namespace cryptor {
 
         return config;
     }
-} // namespace
+}  // namespace cryptor
 
 #endif
