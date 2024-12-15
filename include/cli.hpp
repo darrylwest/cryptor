@@ -121,6 +121,7 @@ namespace cryptor {
 
         } catch (const cxxopts::OptionException& exp) {
             std::cout << "error parsing cli options: " << exp.what() << std::endl;
+            exit(1);
         }
 
         return config;

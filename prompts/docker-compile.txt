@@ -1,40 +1,39 @@
-I have a compiler problem with a cmake project inside a debian:bookworm docker container.  The error looks like this:
+I have a compiler problem with a cmake project inside a debian:bookworm docker container.  
+The verbose error looks like this:
 
+/usr/bin/cmake -S/home/cryptor/cryptor -B/home/cryptor/cryptor/build --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start /home/cryptor/cryptor/build/CMakeFiles /home/cryptor/cryptor/build//CMakeFiles/progress.marks
+make  -f CMakeFiles/Makefile2 all
+make[1]: Entering directory '/home/cryptor/cryptor/build'
+make  -f CMakeFiles/cryptor.dir/build.make CMakeFiles/cryptor.dir/depend
+make[2]: Entering directory '/home/cryptor/cryptor/build'
+cd /home/cryptor/cryptor/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/cryptor/cryptor /home/cryptor/cryptor /home/cryptor/cryptor/build /home/cryptor/cryptor/build /home/cryptor/cryptor/build/CMakeFiles/cryptor.dir/DependInfo.cmake --color=
+Dependencies file "CMakeFiles/cryptor.dir/src/cryptor.cpp.o.d" is newer than depends file "/home/cryptor/cryptor/build/CMakeFiles/cryptor.dir/compiler_depend.internal".
+Consolidate compiler generated dependencies of target cryptor
+make[2]: Leaving directory '/home/cryptor/cryptor/build'
+make  -f CMakeFiles/cryptor.dir/build.make CMakeFiles/cryptor.dir/build
+make[2]: Entering directory '/home/cryptor/cryptor/build'
+[ 16%] Building CXX object CMakeFiles/cryptor.dir/src/cryptor.cpp.o
+/usr/bin/c++ -DCPPHTTPLIB_BROTLI_SUPPORT -DCPPHTTPLIB_OPENSSL_SUPPORT -DCPPHTTPLIB_ZLIB_SUPPORT -DFMT_SHARED -DSPDLOG_COMPILED_LIB -DSPDLOG_FMT_EXTERNAL -DSPDLOG_SHARED_LIB -I/home/cryptor/cryptor/include -O3 -DNDEBUG -std=c++20 -MD -MT CMakeFiles/cryptor.dir/src/cryptor.cpp.o -MF CMakeFiles/cryptor.dir/src/cryptor.cpp.o.d -o CMakeFiles/cryptor.dir/src/cryptor.cpp.o -c /home/cryptor/cryptor/src/cryptor.cpp
 In file included from /home/cryptor/cryptor/src/cryptor.cpp:7:
 /home/cryptor/cryptor/include/cli.hpp: In function 'cryptor::Config cryptor::parse_cli(int, char**)':
 /home/cryptor/cryptor/include/cli.hpp:122:48: error: expected unqualified-id before '&' token
-  122 |         } catch (const cxxopts::OptionException& e) {
+  122 |         } catch (const cxxopts::OptionException& exp) {
       |                                                ^
 /home/cryptor/cryptor/include/cli.hpp:122:48: error: expected ')' before '&' token
-  122 |         } catch (const cxxopts::OptionException& e) {
+  122 |         } catch (const cxxopts::OptionException& exp) {
       |                 ~                              ^
       |                                                )
 /home/cryptor/cryptor/include/cli.hpp:122:48: error: expected '{' before '&' token
-/home/cryptor/cryptor/include/cli.hpp:122:50: error: 'e' was not declared in this scope; did you mean 'std::numbers::e'?
-  122 |         } catch (const cxxopts::OptionException& e) {
-      |                                                  ^
-      |                                                  std::numbers::e
-In file included from /usr/include/c++/12/bits/max_size_type.h:37,
-                 from /usr/include/c++/12/bits/ranges_base.h:38,
-                 from /usr/include/c++/12/string_view:50,
-                 from /usr/include/c++/12/bits/basic_string.h:47,
-                 from /usr/include/c++/12/string:53,
-                 from /usr/include/c++/12/stdexcept:39,
-                 from /usr/include/c++/12/system_error:41,
-                 from /usr/include/c++/12/bits/std_mutex.h:39,
-                 from /usr/include/c++/12/bits/atomic_wait.h:49,
-                 from /usr/include/c++/12/bits/atomic_base.h:41,
-                 from /usr/include/c++/12/atomic:41,
-                 from /usr/include/spdlog/details/null_mutex.h:6,
-                 from /usr/include/spdlog/common.h:7,
-                 from /usr/include/spdlog/spdlog.h:12,
-                 from /home/cryptor/cryptor/src/cryptor.cpp:5:
-/usr/include/c++/12/numbers:122:27: note: 'std::numbers::e' declared here
-  122 |   inline constexpr double e = e_v<double>;
-      |                           ^
-gmake[2]: *** [CMakeFiles/cryptor.dir/build.make:76: CMakeFiles/cryptor.dir/src/cryptor.cpp.o] Error 1
-gmake[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/cryptor.dir/all] Error 2
-gmake: *** [Makefile:136: all] Error 2
+/home/cryptor/cryptor/include/cli.hpp:122:53: error: expected ';' before ')' token
+  122 |         } catch (const cxxopts::OptionException& exp) {
+      |                                                     ^
+      |                                                     ;
+make[2]: *** [CMakeFiles/cryptor.dir/build.make:76: CMakeFiles/cryptor.dir/src/cryptor.cpp.o] Error 1
+make[2]: Leaving directory '/home/cryptor/cryptor/build'
+make[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/cryptor.dir/all] Error 2
+make[1]: Leaving directory '/home/cryptor/cryptor/build'
+make: *** [Makefile:136: all] Error 2
 
 ------------------------------------------------------------
 
@@ -60,6 +59,236 @@ WORKDIR /home/cryptor
 
 # CMD [ "/usr/local/bin/cryptor" ]
 CMD [ "/usr/bin/sleep", "600d" ]
+
+------------------------------------------------------------
+
+Here is the source for cli.hpp
+
+//
+// 2024-12-09 10:28:16 dpw
+//
+
+#ifndef CLI_INCLUDE
+#define CLI_INCLUDE
+
+#include <cxxopts.hpp>
+#include <iostream>
+#include <spdlog/spdlog.h>
+
+#include "version.hpp"
+
+namespace cryptor {
+
+    struct Config {
+        std::string host = "0.0.0.0";
+        int port = 2022;
+        std::string base_dir = "./";
+        int verbose = 1;
+        std::string cert_file = "./.ssh/cert.pem";
+        std::string key_file = "./.ssh/key.pem";
+
+        friend std::ostream& operator<<(std::ostream& os, const Config v) {
+            // better to use <format> but it breaks on linux and fmt broken on darwin
+            os << "host: " << v.host << ", "
+            << "port: " << v.port << ", "
+            << "base: " << v.base_dir << ", "
+            << "cert: " << v.cert_file << ", "
+            << "key : " << v.key_file << ", "
+            << "verbose: " << v.verbose << ".";
+            return os;
+        }
+
+        std::string to_string() const {
+            std::ostringstream oss;
+            oss << *this;
+
+            return oss.str();
+        }
+    };
+
+    /*
+    * parse the command line
+    */
+    Config parse_cli(const int argc, char** argv) {
+        auto config = Config();
+
+        try {
+            cxxopts::Options options("cryptor", "tls server for cryptor web app");
+            // clang-format off
+            options
+                .add_options()
+                    ("p,port", "listening port", cxxopts::value<int>())
+                    ("H,host", "listening host", cxxopts::value<std::string>())
+                    ("b,base", "base directory to serve", cxxopts::value<std::string>())
+                    ("C,cert", "the cert pem file", cxxopts::value<std::string>())
+                    ("K,key", "the key pem file", cxxopts::value<std::string>())
+                    ("l,level", "verbose level 0--4", cxxopts::value<int>())
+                    ("V,version", "Show the current version and exit")
+                    ("h,help", "Show this help")
+                ;
+
+            // clang-format on
+            const auto version = cryptor::Version();
+            const auto result = options.parse(argc, argv);
+            if (result.count("version")) {
+                std::cout << "Server Version: " << version << std::endl;
+                exit(0);
+            }
+
+            if (result.count("help")) {
+                std::cout << "Server Version: " << version << std::endl;
+                std::cout << options.help() << std::endl;
+                exit(0);
+            }
+
+            if (result.count("port")) {
+                config.port = result["port"].as<int>();
+            }
+
+            if (result.count("host")) {
+                config.host = result["host"].as<std::string>();
+            }
+
+            if (result.count("base")) {
+                config.base_dir = result["base"].as<std::string>();
+            }
+
+            if (result.count("cert")) {
+                config.cert_file = result["cert"].as<std::string>();
+            }
+
+            if (result.count("key")) {
+                config.key_file = result["key"].as<std::string>();
+            }
+
+            if (result.count("level")) {
+                auto level = result["level"].as<int>();
+                switch (level) {
+                case 0:
+                    spdlog::set_level(spdlog::level::debug);
+                    break;
+                case 2:
+                    spdlog::set_level(spdlog::level::warn);
+                    break;
+                case 3:
+                    spdlog::set_level(spdlog::level::err);
+                    break;
+                case 4:
+                    spdlog::set_level(spdlog::level::critical);
+                    break;
+                case 5:
+                    spdlog::set_level(spdlog::level::off);
+                    break;
+                default:
+                    spdlog::set_level(spdlog::level::info);
+                    break;
+                }
+            }
+
+        } catch (const cxxopts::OptionException& exp) {
+            std::cout << "error parsing cli options: " << exp.what() << std::endl;
+        }
+
+        return config;
+    }
+} // namespace
+
+#endif
+
+
+------------------------------------------------------------
+
+And my CMakeFiles.txt:
+
+cmake_minimum_required(VERSION 3.16)
+
+# Project name and version
+project(Cryptor VERSION 1.0 LANGUAGES CXX)
+
+# Set C++ standard
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+# Set default build type to Release
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+endif()
+
+# Define source and include directories
+set(SRC_DIR "src")
+set(INCLUDE_DIR "include")
+set(BIN_DIR "build")
+
+file(GLOB SOURCES ${SRC_DIR}/*.cpp)
+
+# Output directories
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/${BIN_DIR})
+
+# Include directories
+include_directories(${INCLUDE_DIR})
+
+# Find dependencies
+find_package(OpenSSL REQUIRED)
+find_package(ZLIB REQUIRED)
+find_package(spdlog REQUIRED)
+
+# Brotli (assumes it is installed using Homebrew or similar package manager)
+if(APPLE AND EXISTS "/opt/homebrew")
+    set(BROTLI_ROOT "/opt/homebrew")
+else()
+    set(BROTLI_ROOT "/usr/local")
+endif()
+
+find_path(BROTLI_INCLUDE_DIR brotli PATHS ${BROTLI_ROOT}/include)
+find_library(BROTLI_COMMON_LIBRARY NAMES brotlicommon PATHS ${BROTLI_ROOT}/lib)
+find_library(BROTLI_ENC_LIBRARY NAMES brotlienc PATHS ${BROTLI_ROOT}/lib)
+find_library(BROTLI_DEC_LIBRARY NAMES brotlidec PATHS ${BROTLI_ROOT}/lib)
+
+if(NOT BROTLI_INCLUDE_DIR OR NOT BROTLI_COMMON_LIBRARY OR NOT BROTLI_ENC_LIBRARY OR NOT BROTLI_DEC_LIBRARY)
+    message(FATAL_ERROR "Brotli libraries not found. Make sure they are installed.")
+endif()
+
+# Libraries for dependencies
+set(DEPENDENT_LIBRARIES
+    OpenSSL::SSL
+    OpenSSL::Crypto
+    ZLIB::ZLIB
+    spdlog::spdlog
+    ${BROTLI_COMMON_LIBRARY}
+    ${BROTLI_ENC_LIBRARY}
+    ${BROTLI_DEC_LIBRARY}
+    pthread
+)
+
+# Frameworks for macOS
+if(APPLE)
+    list(APPEND DEPENDENT_LIBRARIES
+        "-framework CoreFoundation"
+        "-framework Security"
+    )
+endif()
+
+# Compiler definitions
+add_definitions(
+    -DCPPHTTPLIB_OPENSSL_SUPPORT
+    -DCPPHTTPLIB_ZLIB_SUPPORT
+    -DCPPHTTPLIB_BROTLI_SUPPORT
+)
+
+# Add executable targets
+add_executable(cryptor ${SRC_DIR}/cryptor.cpp)
+add_executable(unit ${SRC_DIR}/unit.cpp)
+add_executable(integration ${SRC_DIR}/integration.cpp)
+
+# Link libraries to executables
+target_link_libraries(cryptor PRIVATE ${DEPENDENT_LIBRARIES})
+target_link_libraries(unit PRIVATE ${DEPENDENT_LIBRARIES})
+target_link_libraries(integration ${DEPENDENT_LIBRARIES})
+
+# Installation rules
+install(TARGETS cryptor unit integration DESTINATION ${BIN_DIR})
+
 
 ------------------------------------------------------------
 
