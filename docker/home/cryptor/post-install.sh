@@ -5,6 +5,8 @@
 
 set -eu
 
+git clone git@github.com:darrylwest/cryptor.git
+
 [ -x .cargo/bin/cargo ] || {
     curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
     cargo install lsd
