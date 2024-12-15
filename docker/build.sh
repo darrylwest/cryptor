@@ -15,6 +15,8 @@ export NAME="cryptor-service"
 export DOCKER_REPO=darrylwest
 export IMAGE="$DOCKER_REPO/$NAME"
 
+# TODO: copy ../html/index.html to home/cryptor/www/
+
 file="install.tgz"
 tar czvf $file home/ usr/local/
 
