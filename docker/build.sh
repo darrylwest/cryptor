@@ -17,6 +17,8 @@ export IMAGE="$DOCKER_REPO/$NAME"
 
 # TODO: copy ../html/index.html to home/cryptor/www/
 
+cp ../.ssh/*.pem home/cryptor/.ssh/
+
 file="install.tgz"
 tar czvf $file home/ usr/local/
 
