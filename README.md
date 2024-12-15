@@ -40,8 +40,7 @@ does require running [docker](https://hub.docker.com/).
 Here is an install script that should work on Debian 12 or Umbutu 22:
 
 ```
-sudo apt-get update \
-    && apt-get upgrade -y \
+sudo apt-get update && apt-get upgrade -y \
     && apt-get install -y libspdlog-dev libcxxopts-dev libcpp-httplib-dev openssl spdlog cxxopts
 ```
 
