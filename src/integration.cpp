@@ -2,18 +2,19 @@
 // 2024-12-13 15:25:10 dpw
 //
 
-#include <ansi_colors.hpp>
 #include <httplib.h>
-#include <iostream>
-#include <thread>
-#include <atomic>
-#include <cassert>
-#include <cstdlib>
-#include <csignal>
 #include <spdlog/spdlog.h>
 
-#include "version.hpp"
+#include <ansi_colors.hpp>
+#include <atomic>
+#include <cassert>
+#include <csignal>
+#include <cstdlib>
+#include <iostream>
+#include <thread>
+
 #include "testlib.hpp"
+#include "version.hpp"
 
 using namespace colors;
 
