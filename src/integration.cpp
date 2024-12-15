@@ -22,12 +22,14 @@
 
 using namespace colors;
 
+const std::string PORT = "22022";
+
 // Define the function to start the service
 void run_server(std::atomic<bool>& running, const std::string& log_file) {
     running = true;
 
     // Open a pipe to start the service
-    std::string command = "./build/cryptor --base html/ --port 22022 --level 0 > " + log_file + " 2>&1 & echo $!";
+    std::string command = "./build/cryptor --base html/ --port " + PORT + " > " + log_file + " 2>&1 & echo $!";
     FILE* pipe = popen(command.c_str(), "r");
     if (!pipe) {
         std::cerr << "Failed to start service.\n";
@@ -69,7 +71,7 @@ int main(int argc, char* argv[]) {
     std::cout << cyan << msg << yellow << cryptor::Version() << reset << "\n" << std::endl;
 
     // Create a client for testing
-    httplib::Client cli("https://localhost:22022");
+    httplib::Client cli("https://localhost:" + PORT);
     cli.enable_server_certificate_verification(false);
 
     // Test 1: Verify version endpoint

@@ -30,6 +30,11 @@ do
 
             shift
         ;;
+        unit)
+            $root/build/unit
+
+            shift
+        ;;
         test)
             # TODO check that unit has been built and is newer that all the souces
             $root/build/unit
