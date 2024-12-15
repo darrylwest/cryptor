@@ -6,8 +6,8 @@
 
 #include "cli.hpp"
 #include "logging.hpp"
-#include "version.hpp"
 #include "service.hpp"
+#include "version.hpp"
 
 int main(const int argc, char **argv) {
     using namespace httplib;
