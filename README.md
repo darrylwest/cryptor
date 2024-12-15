@@ -1,5 +1,16 @@
 # Cryptor Web App
 
+```
+_______________________________________________________________________________________
+
+ ______                    __                _______                    __
+|      |.----.--.--.-----.|  |_.-----.----. |     __|.-----.----.--.--.|__|.----.-----.
+|   ---||   _|  |  |  _  ||   _|  _  |   _| |__     ||  -__|   _|  |  ||  ||  __|  -__|
+|______||__| |___  |   __||____|_____|__|   |_______||_____|__|  \___/ |__||____|_____|
+             |_____|__|
+_______________________________________________________________________________________
+```
+
 ## Overview
 
 The Cryptor Web App and service enable encryption and decryption of sensitive private messages.  The service is 
@@ -16,8 +27,11 @@ locally reduces the risk of phishing attacts.
 The easiest way to run Cryptor service without having to compile is by running the pre-compiled docker image.  It
 does require running [docker](https://hub.docker.com/).
 
+See the docker folder for shell scipts to run the container: `./run.sh` then point your browser to [the app](https://localhost:29200).
+It's also possible to attach to the container, run the post-install script and modify the html or server source (NOTE: you need github access for this).
 
-### Mac (Intel and ATOM)
+
+### Mac (Intel & Apple Silicon)
 
 * [ ] Intel: macOS Sonoma Version 14.6
 * [ ] Silicon: macOS Sequoia Version 15.1
@@ -31,11 +45,12 @@ does require running [docker](https://hub.docker.com/).
 
 ### Linux
 
-* [ ] g++ version 11.
+* [ ] g++ version 11 or 12.
 * [ ] cmake
 * [ ] spdlog (complied with make install)
 * [ ] openssl@3
 * [ ] cpp-httplib
+* [ ] clang-format (optional)
 
 Here is an install script that should work on Debian 12 or Umbutu 22:
 
@@ -48,16 +63,33 @@ sudo apt-get update && apt-get upgrade -y \
 
 The server requires cert.pem and key.pem files to enable TLS.  You can create them using openssl.
 
+### Build the application
+
+Easiest way to build the applicaton is to run the `mk` shell script like this:
+
+`./mk init build`
+
 ### Run the applicaton
 
-_TBD_
+After a successfule build, you can run the application like this:
 
-### Run the unit tests
+'./build/cryptor --base $root/html
 
-_TBD_
+Or, like this: `./mk run`
+
+### Run Unit & Integration Test
+
+After a successfule build, you can run the unit and integration tests like this:
+
+'''
+./build/unit
+./build/integration
+'''
+
+Or, like this: `./mk test`
 
 ## Reporting Issues
 
 A list of issues is available in the crypto repo.
 
-###### 2024.12.14 | dpw
+###### 2024.12.15 | dpw
