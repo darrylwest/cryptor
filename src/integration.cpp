@@ -4,18 +4,16 @@
 
 #include <httplib.h>
 #include <spdlog/spdlog.h>
+#include <unistd.h>
 
 #include <ansi_colors.hpp>
 #include <atomic>
 #include <cassert>
 #include <csignal>
-#include <cstdlib>
 #include <cstdio>
+#include <cstdlib>
 #include <iostream>
 #include <thread>
-#include <atomic>
-#include <csignal>
-#include <unistd.h>
 
 #include "testlib.hpp"
 #include "version.hpp"
@@ -29,7 +27,8 @@ void run_server(std::atomic<bool>& running, const std::string& log_file) {
     running = true;
 
     // Open a pipe to start the service
-    std::string command = "./build/cryptor --base html/ --port " + PORT + " > " + log_file + " 2>&1 & echo $!";
+    std::string command
+        = "./build/cryptor --base html/ --port " + PORT + " > " + log_file + " 2>&1 & echo $!";
     FILE* pipe = popen(command.c_str(), "r");
     if (!pipe) {
         std::cerr << "Failed to start service.\n";
@@ -62,7 +61,7 @@ int main(int argc, char* argv[]) {
     // start the server thread
     std::thread server_thread(run_server, std::ref(server_running), log_file);
 
-     // Wait for the server to start
+    // Wait for the server to start
     while (!server_running) {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
