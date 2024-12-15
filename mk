@@ -34,7 +34,7 @@ do
             # TODO check that unit has been built and is newer that all the souces
             $root/build/unit
             $root/build/integration
-            bat $root/service.log
+            bat --paging=never $root/service.log
 
             shift
         ;;
