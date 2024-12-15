@@ -16,7 +16,7 @@ export DOCKER_REPO=darrylwest
 export IMAGE="$DOCKER_REPO/$NAME"
 
 file="install.tgz"
-tar czvf $file home/
+tar czvf $file home/ usr/local/
 
 docker build \
     -t $IMAGE:$VERSION \

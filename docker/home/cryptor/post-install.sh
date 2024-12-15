@@ -5,6 +5,7 @@
 
 set -eu
 
+# make sure the id_rsa keys are copied first... 
 git clone git@github.com:darrylwest/cryptor.git
 
 [ -x .cargo/bin/cargo ] || {
