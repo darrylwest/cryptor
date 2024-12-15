@@ -9,7 +9,7 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
 export EDITOR=vi
 export PYTHONSTARTUP=~/.pythonrc.py
 
-PS1="dpw@keys: "
+PS1="cryptor: "
 
 alias hi='history'
 alias rm='/bin/rm -i'
