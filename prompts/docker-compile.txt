@@ -1,0 +1,67 @@
+I have a compiler problem with a cmake project inside a debian:bookworm docker container.  The error looks like this:
+
+[ 16%] Building CXX object CMakeFiles/cryptor.dir/src/cryptor.cpp.o
+In file included from /home/cryptor/cryptor/src/cryptor.cpp:7:
+/home/cryptor/cryptor/include/cli.hpp: In function 'cryptor::Config cryptor::parse_cli(int, char**)':
+/home/cryptor/cryptor/include/cli.hpp:97:48: error: expected unqualified-id before '&' token
+   97 |         } catch (const cxxopts::OptionException& e) {
+      |                                                ^
+/home/cryptor/cryptor/include/cli.hpp:97:48: error: expected ')' before '&' token
+   97 |         } catch (const cxxopts::OptionException& e) {
+      |                 ~                              ^
+      |                                                )
+/home/cryptor/cryptor/include/cli.hpp:97:48: error: expected '{' before '&' token
+/home/cryptor/cryptor/include/cli.hpp:97:50: error: 'e' was not declared in this scope; did you mean 'std::numbers::e'?
+   97 |         } catch (const cxxopts::OptionException& e) {
+      |                                                  ^
+      |                                                  std::numbers::e
+In file included from /usr/include/c++/12/bits/max_size_type.h:37,
+                 from /usr/include/c++/12/bits/ranges_base.h:38,
+                 from /usr/include/c++/12/string_view:50,
+                 from /usr/include/c++/12/bits/basic_string.h:47,
+                 from /usr/include/c++/12/string:53,
+                 from /usr/include/c++/12/stdexcept:39,
+                 from /usr/include/c++/12/system_error:41,
+                 from /usr/include/c++/12/bits/std_mutex.h:39,
+                 from /usr/include/c++/12/bits/atomic_wait.h:49,
+                 from /usr/include/c++/12/bits/atomic_base.h:41,
+                 from /usr/include/c++/12/atomic:41,
+                 from /usr/include/spdlog/details/null_mutex.h:6,
+                 from /usr/include/spdlog/common.h:7,
+                 from /usr/include/spdlog/spdlog.h:12,
+                 from /home/cryptor/cryptor/src/cryptor.cpp:5:
+/usr/include/c++/12/numbers:122:27: note: 'std::numbers::e' declared here
+  122 |   inline constexpr double e = e_v<double>;
+      |                           ^
+make[2]: *** [CMakeFiles/cryptor.dir/build.make:76: CMakeFiles/cryptor.dir/src/cryptor.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/cryptor.dir/all] Error 2
+make: *** [Makefile:136: all] Error 2
+
+------------------------------------------------------------
+
+Here is the docker file that I'm using:
+
+#
+#
+#
+FROM debian:bookworm
+
+LABEL maintainer="darryl.west" version="2024.12.14"
+
+RUN apt-get update && apt-get install -y \
+    make binutils autoconf automake autotools-dev libtool pkg-config cmake \
+    build-essential gcc g++ uuid-dev clang curl wget jq vim neovim git-core procps \
+    libcxxopts-dev libssl-dev libspdlog-dev zlib1g-dev libbrotli-dev brotli
+
+RUN useradd --create-home cryptor
+
+ADD install.tgz /
+
+WORKDIR /home/cryptor
+
+# CMD [ "/usr/local/bin/cryptor" ]
+CMD [ "/usr/bin/sleep", "600d" ]
+
+------------------------------------------------------------
+
+This code compiles on two other linux machines (Umbuntu) and mac.  Can you help me debug?
