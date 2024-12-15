@@ -1,18 +1,17 @@
 I have a compiler problem with a cmake project inside a debian:bookworm docker container.  The error looks like this:
 
-[ 16%] Building CXX object CMakeFiles/cryptor.dir/src/cryptor.cpp.o
 In file included from /home/cryptor/cryptor/src/cryptor.cpp:7:
 /home/cryptor/cryptor/include/cli.hpp: In function 'cryptor::Config cryptor::parse_cli(int, char**)':
-/home/cryptor/cryptor/include/cli.hpp:97:48: error: expected unqualified-id before '&' token
-   97 |         } catch (const cxxopts::OptionException& e) {
+/home/cryptor/cryptor/include/cli.hpp:122:48: error: expected unqualified-id before '&' token
+  122 |         } catch (const cxxopts::OptionException& e) {
       |                                                ^
-/home/cryptor/cryptor/include/cli.hpp:97:48: error: expected ')' before '&' token
-   97 |         } catch (const cxxopts::OptionException& e) {
+/home/cryptor/cryptor/include/cli.hpp:122:48: error: expected ')' before '&' token
+  122 |         } catch (const cxxopts::OptionException& e) {
       |                 ~                              ^
       |                                                )
-/home/cryptor/cryptor/include/cli.hpp:97:48: error: expected '{' before '&' token
-/home/cryptor/cryptor/include/cli.hpp:97:50: error: 'e' was not declared in this scope; did you mean 'std::numbers::e'?
-   97 |         } catch (const cxxopts::OptionException& e) {
+/home/cryptor/cryptor/include/cli.hpp:122:48: error: expected '{' before '&' token
+/home/cryptor/cryptor/include/cli.hpp:122:50: error: 'e' was not declared in this scope; did you mean 'std::numbers::e'?
+  122 |         } catch (const cxxopts::OptionException& e) {
       |                                                  ^
       |                                                  std::numbers::e
 In file included from /usr/include/c++/12/bits/max_size_type.h:37,
@@ -33,9 +32,9 @@ In file included from /usr/include/c++/12/bits/max_size_type.h:37,
 /usr/include/c++/12/numbers:122:27: note: 'std::numbers::e' declared here
   122 |   inline constexpr double e = e_v<double>;
       |                           ^
-make[2]: *** [CMakeFiles/cryptor.dir/build.make:76: CMakeFiles/cryptor.dir/src/cryptor.cpp.o] Error 1
-make[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/cryptor.dir/all] Error 2
-make: *** [Makefile:136: all] Error 2
+gmake[2]: *** [CMakeFiles/cryptor.dir/build.make:76: CMakeFiles/cryptor.dir/src/cryptor.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/cryptor.dir/all] Error 2
+gmake: *** [Makefile:136: all] Error 2
 
 ------------------------------------------------------------
 
