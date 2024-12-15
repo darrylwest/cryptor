@@ -20,6 +20,8 @@ Encrypted files are note saved by the backend service, but to the downloads fold
 browser application.  Also important to note that the password never leaves the browser.  Hosting the service
 locally reduces the risk of phishing attacts.
 
+You can preview the hosted web app [here](https://darrylwest.github.io/cryptor/).
+
 ## Installation Instructions
 
 ### Docker
