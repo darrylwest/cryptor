@@ -16,5 +16,5 @@ ADD install.tgz /
 
 WORKDIR /home/cryptor
 
-# CMD [ "/usr/local/bin/cryptor" ]
-CMD [ "/usr/bin/sleep", "600d" ]
+CMD [ "/usr/local/bin/cryptor", "--base /home/cryptor/www", "--port 29200" ]
+# CMD [ "/usr/bin/sleep", "600d" ]
