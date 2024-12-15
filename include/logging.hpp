@@ -38,6 +38,6 @@ namespace cryptor {
         show_headers(res.headers);
     }
 
-} // namespace
+}  // namespace cryptor
 
 #endif

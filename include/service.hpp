@@ -16,7 +16,7 @@ using namespace httplib;
 namespace cryptor {
 
     // Function to set up the server and apply configurations
-    bool setup_service(SSLServer& svr, const Config& config) {
+    bool setup_service(SSLServer &svr, const Config &config) {
         if (svr.is_valid() == 0) {
             spdlog::error("ERROR! Server is not valid. Check the cert/key files? Exiting...");
             return false;
@@ -39,7 +39,8 @@ namespace cryptor {
 
         // Mount point
         if (!svr.set_mount_point("/", config.base_dir)) {
-            spdlog::error("ERROR! The specified base directory {} doesn't exist...", config.base_dir);
+            spdlog::error("ERROR! The specified base directory {} doesn't exist...",
+                          config.base_dir);
             return false;
         }
 
@@ -60,7 +61,7 @@ namespace cryptor {
     }
 
     // Function to run the server
-    bool run_service(const Config& config) {
+    bool run_service(const Config &config) {
         SSLServer svr(config.cert_file.c_str(), config.key_file.c_str());
 
         // Set up the server
@@ -73,6 +74,6 @@ namespace cryptor {
         // Start the server
         return svr.listen(config.host, config.port);
     }
-} // namespace
+}  // namespace cryptor
 
 #endif

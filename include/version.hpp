@@ -37,6 +37,6 @@ namespace cryptor {
         }
     };
 
-} // namespace
+}  // namespace cryptor
 
 #endif
