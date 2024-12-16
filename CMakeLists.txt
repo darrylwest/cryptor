@@ -91,7 +91,9 @@ target_link_libraries(integration PRIVATE ${DEPENDENT_LIBRARIES})
 install(TARGETS cryptor unit integration DESTINATION ${BIN_DIR})
 
 # Static linking for standalone executable
-set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
+if(NOT APPLE)
+    set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
+endif()
 
 # MacOS universal binary setup
 if(APPLE)
