@@ -4,11 +4,11 @@
 
 #include <ansi_colors.hpp>
 
-#include "cli.hpp"
-#include "logging.hpp"
-#include "service.hpp"
-#include "testlib.hpp"
-#include "version.hpp"
+#include <cli.hpp>
+#include <logging.hpp>
+#include <service.hpp>
+#include <testlib.hpp>
+#include <version.hpp>
 
 // the actual tests
 
@@ -18,8 +18,8 @@ Results test_version() {
     auto vers = cryptor::Version();
     r.equals(vers.major == 2024);
     r.equals(vers.minor == 12);
-    r.equals(vers.patch == 21);
-    r.equals(vers.build > 119);
+    r.equals(vers.patch == 22);
+    r.equals(vers.build > 125);
 
     return r;
 }

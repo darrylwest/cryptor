@@ -8,8 +8,8 @@
 #include <cxxopts.hpp>
 #include <iostream>
 
-#include "cli.hpp"
-#include "version.hpp"
+#include <cli.hpp>
+#include <version.hpp>
 
 namespace cryptor {
 

@@ -5,8 +5,7 @@
 // create a version struct with major, minor, patch and build attributes
 //
 
-#ifndef VERSION_INCLUDE
-#define VERSION_INCLUDE
+#pragma once
 
 #include <algorithm>
 #include <iostream>
@@ -39,4 +38,3 @@ namespace cryptor {
 
 }  // namespace cryptor
 
-#endif

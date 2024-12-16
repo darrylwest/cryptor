@@ -15,8 +15,8 @@
 #include <iostream>
 #include <thread>
 
-#include "testlib.hpp"
-#include "version.hpp"
+#include <testlib.hpp>
+#include <version.hpp>
 
 using namespace colors;
 

@@ -9,8 +9,8 @@
 #include <cstdio>
 #include <iostream>
 
-#include "service.hpp"
-#include "logging.hpp"
+#include <service.hpp>
+#include <logging.hpp>
 
 using namespace httplib;
 

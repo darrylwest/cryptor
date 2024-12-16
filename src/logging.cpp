@@ -6,7 +6,7 @@
 #include <spdlog/spdlog.h>
 
 #include <iostream>
-#include "logging.hpp"
+#include <logging.hpp>
 
 namespace cryptor {
 
