@@ -13,7 +13,7 @@
 namespace cryptor {
 
     // Function to set up the server and apply configurations
-    bool setup_service(SSLServer &svr, const Config &config);
+    bool setup_service(httplib::SSLServer &svr, const Config &config);
 
     // Function to run the server
     bool run_service(const Config &config);

@@ -41,5 +41,7 @@ namespace cryptor {
 
         Config parse_cli(const int argc, char** argv);
     };
+
+    Config parse_cli(const int argc, char** argv);
 }
 
