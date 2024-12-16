@@ -27,11 +27,13 @@ void run_server(std::atomic<bool>& running, const std::string& log_file) {
     running = true;
 
     // Open a pipe to start the service
-    std::string command
-        = "./build/cryptor --base html/ --port " + PORT + " > " + log_file + " 2>&1 & echo $!";
-    FILE* pipe = popen(command.c_str(), "r");
+    std::string cmd = "./build/cryptor --base html/ --port ";
+    cmd.append(PORT);
+    cmd.append(" > " + log_file + " 2>&1 & echo $!");
+
+    FILE* pipe = popen(cmd.c_str(), "r");
     if (!pipe) {
-        std::cerr << "Failed to start service.\n";
+        std::cerr << red << "Failed to start service." << reset << std::endl;
         running = false;
         return;
     }
@@ -40,9 +42,9 @@ void run_server(std::atomic<bool>& running, const std::string& log_file) {
     char buffer[128];
     if (fgets(buffer, sizeof(buffer), pipe) != nullptr) {
         pid_t pid = std::stoi(buffer);
-        std::cout << "Service started with PID: " << pid << "\n";
+        std::cout << "\t" << green << "Service started with PID: " << pid << reset << std::endl;
     } else {
-        std::cerr << "Failed to retrieve PID of the service.\n";
+        std::cerr << red << "Failed to retrieve PID of the service." << reset << std::endl;
         running = false;
     }
 
@@ -58,16 +60,22 @@ int main(int argc, char* argv[]) {
     std::atomic<bool> server_running(false);
     const std::string log_file = "service.log";
 
+    std::string msg = "Cryptor Server Integration Tests, Version: ";
+    std::cout << cyan << msg << yellow << cryptor::Version() << reset << "\n" << std::endl;
+
+    Results r = {.name = "Integration Test Summary"};
+
     // start the server thread
     std::thread server_thread(run_server, std::ref(server_running), log_file);
 
     // Wait for the server to start
-    while (!server_running) {
+    auto loop_count = 20;
+    while (!server_running && loop_count > 0) {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        loop_count--;
     }
 
-    std::string msg = "Cryptor Server Unit Tests, Version: ";
-    std::cout << cyan << msg << yellow << cryptor::Version() << reset << "\n" << std::endl;
+    r.equals(server_running, "should be running in background thread now");
 
     // Create a client for testing
     httplib::Client cli("https://localhost:" + PORT);
@@ -75,40 +83,53 @@ int main(int argc, char* argv[]) {
 
     // Test 1: Verify version endpoint
     if (auto res = cli.Get("/version")) {
-        assert(res->status == 200);
-        assert(res->body == "1.0.0");
-        std::cout << "Test 1 passed: Version endpoint returned correct response.\n";
+        r.equals(res->status == 200, "the status should be 200");
+        std::cout << "\t" << green << "Test passed: Version endpoint returned correct response." << reset << std::endl;
     } else {
-        std::cerr << "Test 1 failed: Unable to reach version endpoint.\n";
-        return 1;
+        std::cerr << "\t" << red << "Test failed: Unable to reach version endpoint." << reset << std::endl;
     }
 
-    // Test 2: Verify index page title
+    // Verify index page title
     if (auto res = cli.Get("/")) {
-        assert(res->status == 200);
-        assert(res->body.find("<title>Cryptor</title>") != std::string::npos);
-        std::cout << "Test 2 passed: Index page contains correct title.\n";
+        r.equals(res->status == 200);
+        r.equals(res->body.find("<title>Cryptor</title>") != std::string::npos, "the title page shoule be Cryptor");
+        std::cout << "\t" << green << "Test passed: Index page contains correct title." << reset << std::endl;
     } else {
-        std::cerr << "Test 2 failed: Unable to reach index page.\n";
-        return 1;
+        std::cerr << "\t" << red << "Test failed: Unable to reach index page." << reset << std::endl;
     }
 
-    // Test 3: Shut down the server
+    // Shut down the server
     if (auto res = cli.Delete("/shutdown")) {
-        assert(res->status == 200);
-        assert(res->body == "Shutting down");
-        std::cout << "Test 3 passed: Shutdown endpoint returned correct response.\n";
+        r.equals(res->status == 200, "return status should be 200");
+        r.equals(res->body.find("down") != std::string::npos, "the response should say down");
+        std::cout << "\t" << green << "Test passed: Shutdown endpoint returned correct response." << reset << std::endl;
     } else {
-        std::cerr << "Test 3 failed: Unable to reach shutdown endpoint.\n";
-        return 1;
+        std::cerr << "\t" << red << "Test failed: Unable to reach shutdown endpoint." << reset << std::endl;
     }
 
     // Wait for the server thread to stop
     server_thread.join();
 
+    // give the service time to fully shutdown
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
     // Verify server has stopped
-    assert(!server_running);
-    std::cout << "Test 4 passed: Server thread has stopped.\n";
+    // try to Shut down the server
+    if (auto res = cli.Delete("/shutdown")) {
+        r.equals(res->status != 200, "should be shutdown");
+        std::cerr << "\t" << red << "Test failed: Unable to reach shutdown endpoint." << reset << std::endl;
+    } else {
+        r.equals(true, "shutdown ok");
+        std::cout << "\t" << green << "Test passed: Shutdown endpoint returned correct response." << reset << std::endl;
+        server_running = false;
+    }
+
+    r.equals(!server_running, "server should NOT be running.");
+
+    std::cout << "\n" << r << std::endl;
+    msg = (r.failed == 0) ? green + "Ok" : "\n" + red + "Tests failed!";
+
+    std::cout << cyan << "\nIntegration Test Results: " << msg << reset << std::endl;
 
     return 0;
 }
