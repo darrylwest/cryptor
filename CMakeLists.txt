@@ -59,14 +59,6 @@ set(DEPENDENT_LIBRARIES
     pthread
 )
 
-# Frameworks for macOS
-if(APPLE)
-    list(APPEND DEPENDENT_LIBRARIES
-        "-framework CoreFoundation"
-        "-framework Security"
-    )
-endif()
-
 # Compiler definitions
 add_definitions(
     -DCPPHTTPLIB_OPENSSL_SUPPORT
@@ -93,7 +85,25 @@ add_executable(integration ${SRC_DIR}/integration.cpp)
 # Link libraries to executables
 target_link_libraries(cryptor PRIVATE ${DEPENDENT_LIBRARIES})
 target_link_libraries(unit PRIVATE ${DEPENDENT_LIBRARIES})
-target_link_libraries(integration ${DEPENDENT_LIBRARIES})
+target_link_libraries(integration PRIVATE ${DEPENDENT_LIBRARIES})
 
 # Installation rules
 install(TARGETS cryptor unit integration DESTINATION ${BIN_DIR})
+
+# Static linking for standalone executable
+set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
+
+# MacOS universal binary setup
+if(APPLE)
+    set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64")
+    list(APPEND DEPENDENT_LIBRARIES
+        "-framework CoreFoundation"
+        "-framework Security"
+    )
+endif()
+
+# Debian container specific setup
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux" AND EXISTS "/etc/debian_version")
+    # Debian specific configurations (if any)
+endif()
+
