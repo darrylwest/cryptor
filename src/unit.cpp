@@ -155,7 +155,7 @@ void test_bad_mount(Results& r) {
     httplib::SSLServer svr(config.cert_file.c_str(), config.key_file.c_str());
     auto ok = cryptor::setup_service(svr, config);
 
-    r.equals(ok == false, "should fail with bad mount point server");
+    r.equals(ok == false, "should fail with bad file server");
 }
 
 Results test_service() {

@@ -75,8 +75,19 @@ add_definitions(
 )
 
 # Add executable targets
-add_executable(cryptor ${SRC_DIR}/cryptor.cpp)
-add_executable(unit ${SRC_DIR}/unit.cpp)
+add_executable(cryptor 
+    ${SRC_DIR}/cryptor.cpp
+    ${SRC_DIR}/logging.cpp
+    ${SRC_DIR}/service.cpp
+    ${SRC_DIR}/cli.cpp
+)
+add_executable(unit 
+    ${SRC_DIR}/unit.cpp
+    ${SRC_DIR}/logging.cpp
+    ${SRC_DIR}/service.cpp
+    ${SRC_DIR}/cli.cpp
+)
+
 add_executable(integration ${SRC_DIR}/integration.cpp)
 
 # Link libraries to executables

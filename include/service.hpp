@@ -10,6 +10,8 @@
 #include <cstdio>
 #include <iostream>
 
+#include "cli.hpp"
+
 namespace cryptor {
 
     // Function to set up the server and apply configurations

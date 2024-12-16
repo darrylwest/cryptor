@@ -39,4 +39,3 @@ namespace cryptor {
 
 }  // namespace cryptor
 
-#endif

@@ -10,6 +10,7 @@
 #include <iostream>
 
 #include "service.hpp"
+#include "logging.hpp"
 
 using namespace httplib;
 
