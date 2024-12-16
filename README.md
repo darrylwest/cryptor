@@ -16,9 +16,10 @@ ________________________________________________________________________________
 The Cryptor Web App and service enable encryption and decryption of sensitive private messages.  The service is 
 designed to run on a local, private network although it is safe to run in a public hosted environment.  
 
-Encrypted files are note saved by the backend service, but to the downloads folder of the device running the 
-browser application.  Also important to note that the password never leaves the browser.  Hosting the service
-locally reduces the risk of phishing attacts.
+Encrypted files or passwords are not saved by the backend service, and always stay safely in the browser.  Encrypted
+messages are saved in your downloads folder on the device running the application.  It is also important to note 
+that the passphrase never leaves the browser, so it connot be hacked by man-in-the-middle attacts.  
+Hosting the service on your private network also reduces the risk of phishing attacts.
 
 You can preview the hosted web app [here](https://darrylwest.github.io/cryptor/).
 
@@ -26,12 +27,11 @@ You can preview the hosted web app [here](https://darrylwest.github.io/cryptor/)
 
 ### Docker
 
-The easiest way to run Cryptor service without having to compile is by running the pre-compiled docker image.  It
-does require running [docker](https://hub.docker.com/).
+The easiest way to run Cryptor service without having to compile is by running the pre-compiled docker image.  
+It requires running [docker](https://hub.docker.com/) on your local machine, but this is easy on mac or windows.
 
 See the docker folder for shell scipts to run the container: `./run.sh` then point your browser to [the app](https://localhost:29200).
 It's also possible to attach to the container, run the post-install script and modify the html or server source (NOTE: you need github access for this).
-
 
 ### Mac (Intel & Apple Silicon)
 
@@ -92,6 +92,7 @@ Or, like this: `./mk test`
 
 ## Reporting Issues
 
-A list of issues is available in the crypto repo.
+A list of issues is available in the crypto repo.  Feel free to add any issues you find, 
+or any suggestions for enhancements.
 
-###### 2024.12.15 | dpw
+###### 2024.12.16 | dpw
