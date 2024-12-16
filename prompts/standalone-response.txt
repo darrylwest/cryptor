@@ -1,0 +1,19 @@
+MS Copilot:
+
+Other than the larger binary size with standalone, are there any disadvantages I should anticipate?
+
+Going with a standalone executable definitely has its perks, especially for distribution ease and reducing dependency headaches. But here are a few potential downsides to keep in mind:
+
+Binary Size: As you mentioned, the size of the binary can be significantly larger, which might be an issue for systems with limited storage or bandwidth constraints.
+
+Updates and Patching: If a dependency gets a security update or bug fix, you need to rebuild and redistribute your entire application, rather than just updating a shared library. This can be more time-consuming and resource-intensive.
+
+Compatibility: There might be subtle differences in how statically linked libraries behave compared to their shared counterparts. You might run into compatibility issues or unexpected behavior in some cases.
+
+Legal and Licensing: Some libraries have licensing restrictions that might affect how you can distribute statically linked binaries. Ensure you’re in compliance with all licenses of the libraries you’re using.
+
+Memory Usage: Standalone executables might have a higher memory footprint since you're loading multiple instances of the same library code into memory, instead of sharing a single instance.
+
+Performance: In some cases, statically linking can lead to performance overhead due to inlining and increased cache usage. Though this varies greatly with the libraries and the nature of the application.
+
+For your use case, these might not be significant issues, but it’s good to be aware of them. If you have any other questions or need more details, feel free to ask!
