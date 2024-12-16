@@ -95,4 +95,12 @@ Or, like this: `./mk test`
 A list of issues is available in the crypto repo.  Feel free to add any issues you find, 
 or any suggestions for enhancements.
 
+## Contributing
+
+_TBD_
+
+## Credits
+
+_TBD_
+
 ###### 2024.12.16 | dpw
