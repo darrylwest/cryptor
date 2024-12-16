@@ -1,0 +1,20 @@
+#
+# this doesn't save enough space to be worth the effort, so...
+#
+FROM debian:bookworm-slim
+
+LABEL maintainer="darryl.west" version="2024.12.16"
+
+# this is the minimal...
+RUN apt-get update && apt-get install -y \
+    build-essential gcc g++ uuid-dev clang curl libcxxopts-dev \
+    libssl-dev libspdlog-dev zlib1g-dev libbrotli-dev brotli procps
+
+RUN useradd --create-home cryptor
+
+ADD install.tgz /
+
+WORKDIR /home/cryptor
+
+CMD [ "/usr/local/bin/cryptor", "--base", "/home/cryptor/www", "--port", "29300" ]
+# CMD [ "/usr/bin/sleep", "600d" ]
