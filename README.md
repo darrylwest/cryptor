@@ -18,8 +18,8 @@ designed to run on a local, private network although it is safe to run in a publ
 
 Encrypted files or passwords are not saved by the backend service, and always stay safely in the browser.  Encrypted
 messages are saved in your downloads folder on the device running the application.  It is also important to note 
-that the passphrase never leaves the browser, so it connot be hacked by man-in-the-middle attacts.  
-Hosting the service on your private network also reduces the risk of phishing attacts.
+that the passphrase never leaves the browser, so it cannot be hacked by man-in-the-middle attacks.  
+Hosting the service on your private network also reduces the risk of phishing attacks.
 
 You can preview the hosted web app [here](https://darrylwest.github.io/cryptor/).
 
@@ -27,10 +27,10 @@ You can preview the hosted web app [here](https://darrylwest.github.io/cryptor/)
 
 ### Docker
 
-The easiest way to run Cryptor service without having to compile is by running the pre-compiled docker image.  
-It requires running [docker](https://hub.docker.com/) on your local machine, but this is easy on mac or windows.
+The easiest way to run Cryptor service without having to compile is by running the pre-compiled Docker image.  
+It requires running [Docker](https://hub.docker.com/) on your local machine, but this is easy on mac or windows.
 
-See the docker folder for shell scipts to run the container: `./run.sh` then point your browser to [the app](https://localhost:29200).
+See the Docker folder for shell scripts to run the container: `./run.sh` then point your browser to [the app](https://localhost:29200).
 It's also possible to attach to the container, run the post-install script and modify the html or server source (NOTE: you need github access for this).
 
 ### Mac (Intel & Apple Silicon)
@@ -49,14 +49,14 @@ It's also possible to attach to the container, run the post-install script and m
 
 * [ ] g++ version 11 or 12.
 * [ ] cmake
-* [ ] spdlog (complied with make install)
+* [ ] spdlog (compiled with make install)
 * [ ] openssl@3
 * [ ] cpp-httplib
 * [ ] clang-format (optional)
 
 Here is an install script that should work on Debian 12 or Umbutu 22:
 
-```
+```bash
 sudo apt-get update && apt-get upgrade -y \
     && apt-get install -y libspdlog-dev libcxxopts-dev libcpp-httplib-dev openssl spdlog cxxopts
 ```
@@ -67,13 +67,13 @@ The server requires cert.pem and key.pem files to enable TLS.  You can create th
 
 ### Build the application
 
-Easiest way to build the applicaton is to run the `mk` shell script like this:
+Easiest way to build the application is to run the `mk` shell script like this:
 
 `./mk init build`
 
-### Run the applicaton
+### Run the application
 
-After a successfule build, you can run the application like this:
+After a successful build, you can run the application like this:
 
 './build/cryptor --base $root/html
 
@@ -81,9 +81,9 @@ Or, like this: `./mk run`
 
 ### Run Unit & Integration Test
 
-After a successfule build, you can run the unit and integration tests like this:
+After a successful build, you can run the unit and integration tests like this:
 
-'''
+'''bash
 ./build/unit
 ./build/integration
 '''
