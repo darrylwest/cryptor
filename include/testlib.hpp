@@ -2,8 +2,7 @@
 // 2024-12-10 18:46:25 dpw:wq
 //
 
-#ifndef UNIT_TEST_INCLUDE
-#define UNIT_TEST_INCLUDE
+#pragma once
 
 #include <ansi_colors.hpp>
 #include <iostream>
@@ -66,4 +65,3 @@ struct Results {
     }
 };
 
-#endif
