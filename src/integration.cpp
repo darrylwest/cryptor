@@ -120,7 +120,7 @@ int main(int argc, char* argv[]) {
         std::cerr << "\t" << red << "Test failed: Unable to reach shutdown endpoint." << reset << std::endl;
     } else {
         r.equals(true, "shutdown ok");
-        std::cout << "\t" << green << "Test passed: Shutdown endpoint returned correct response." << reset << std::endl;
+        std::cout << "\t" << green << "Test passed: the server is down." << reset << std::endl;
         server_running = false;
     }
 
