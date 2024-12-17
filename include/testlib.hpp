@@ -64,4 +64,3 @@ struct Results {
         skipped += r.skipped;
     }
 };
-

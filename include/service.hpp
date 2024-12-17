@@ -21,4 +21,3 @@ namespace cryptor {
     bool run_service(const Config &config);
 
 }  // namespace cryptor
-
