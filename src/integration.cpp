@@ -83,34 +83,27 @@ int main(int argc, char* argv[]) {
     // Test 1: Verify version endpoint
     if (auto res = cli.Get("/version")) {
         r.equals(res->status == 200, "the status should be 200");
-        std::cout << "\t" << green << "Test passed: Version endpoint returned correct response."
-                  << reset << std::endl;
+        std::cout << "\t" << green << "Test passed: Version endpoint returned correct response." << reset << std::endl;
     } else {
-        std::cerr << "\t" << red << "Test failed: Unable to reach version endpoint." << reset
-                  << std::endl;
+        std::cerr << "\t" << red << "Test failed: Unable to reach version endpoint." << reset << std::endl;
     }
 
     // Verify index page title
     if (auto res = cli.Get("/")) {
         r.equals(res->status == 200);
-        r.equals(res->body.find("<title>Cryptor</title>") != std::string::npos,
-                 "the title page shoule be Cryptor");
-        std::cout << "\t" << green << "Test passed: Index page contains correct title." << reset
-                  << std::endl;
+        r.equals(res->body.find("<title>Cryptor</title>") != std::string::npos, "the title page shoule be Cryptor");
+        std::cout << "\t" << green << "Test passed: Index page contains correct title." << reset << std::endl;
     } else {
-        std::cerr << "\t" << red << "Test failed: Unable to reach index page." << reset
-                  << std::endl;
+        std::cerr << "\t" << red << "Test failed: Unable to reach index page." << reset << std::endl;
     }
 
     // Shut down the server
     if (auto res = cli.Delete("/shutdown")) {
         r.equals(res->status == 200, "return status should be 200");
         r.equals(res->body.find("down") != std::string::npos, "the response should say down");
-        std::cout << "\t" << green << "Test passed: Shutdown endpoint returned correct response."
-                  << reset << std::endl;
+        std::cout << "\t" << green << "Test passed: Shutdown endpoint had correct response." << reset << std::endl;
     } else {
-        std::cerr << "\t" << red << "Test failed: Unable to reach shutdown endpoint." << reset
-                  << std::endl;
+        std::cerr << "\t" << red << "Test failed: Unable to reach shutdown endpoint." << reset << std::endl;
     }
 
     // Wait for the server thread to stop
@@ -123,8 +116,7 @@ int main(int argc, char* argv[]) {
     // try to Shut down the server
     if (auto res = cli.Delete("/shutdown")) {
         r.equals(res->status != 200, "should be shutdown");
-        std::cerr << "\t" << red << "Test failed: Unable to reach shutdown endpoint." << reset
-                  << std::endl;
+        std::cerr << "\t" << red << "Test failed: Unable to reach shutdown endpoint." << reset << std::endl;
     } else {
         r.equals(true, "shutdown ok");
         std::cout << "\t" << green << "Test passed: the server is down." << reset << std::endl;
