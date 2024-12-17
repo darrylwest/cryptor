@@ -8,6 +8,7 @@
 #include <logging.hpp>
 #include <service.hpp>
 #include <version.hpp>
+#include <unit.hpp>
 
 int main(const int argc, char **argv) {
     using namespace httplib;

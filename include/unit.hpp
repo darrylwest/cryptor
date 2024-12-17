@@ -168,7 +168,8 @@ Results test_service() {
     return r;
 }
 
-int main(int argc, char* argv[]) {
+// replaces main
+int run_unit_tests(int argc, char* argv[]) {
     using namespace colors;
     spdlog::set_level(spdlog::level::off);
 
