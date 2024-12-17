@@ -3,7 +3,6 @@
 //
 
 #include <ansi_colors.hpp>
-
 #include <cli.hpp>
 #include <logging.hpp>
 #include <service.hpp>
