@@ -1,8 +1,8 @@
 I have a c++20 cmake project that compiles sections of the code to objects then links the objects to the final main application called cryptor.
 The same project has two other binaries called unit and integration for testing.  These two test applications should share the objects
-from cryptor but the current CMakeFiles.txt directs these apps to create and compile their own objects.
+from cryptor but the current CMakeLists.txt directs these apps to create and compile their own objects.
 
-Can you help me modify my CMakeFiles.txt to solve this problem?  Here is my file:
+Can you help me modify my CMakeLists.txt to solve this problem?  Here is my file:
 
 
 cmake_minimum_required(VERSION 3.16)
