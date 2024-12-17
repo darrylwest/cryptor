@@ -39,7 +39,7 @@ do
         ;;
         test)
             # TODO check that unit has been built and is newer that all the souces
-            # $root/build/unit
+            $root/build/unit
             $root/build/integration
             bat --paging=never $root/service.log
 
@@ -54,6 +54,12 @@ do
         run-debug)
             # TODO check that cryptor has been built and is newer that all the souces
             $root/build/cryptor --base $root/html --level 0
+
+            shift
+        ;;
+        format)
+            clang-format -i include/*.hpp src/*.cpp
+            git status -s
 
             shift
         ;;
@@ -98,6 +104,7 @@ do
             echo "   test     : run all tests"
             echo "   run      : runs the app and shows version"
             echo "   run-debug: runs the service with logging set to debug"
+            echo "   format   : runs clang-format over includes and src"
             echo "   watch    : run watcher over source and include"
             echo "   clean    : remove binary builds"
             echo "   clobber  : remove the entire build folder"

@@ -6,9 +6,6 @@
 #include <spdlog/spdlog.h>
 #include <unistd.h>
 
-#include <vendor/ansi_colors.hpp>
-#include <vendor/testlib.hpp>
-
 #include <atomic>
 #include <cassert>
 #include <csignal>
@@ -16,6 +13,8 @@
 #include <cstdlib>
 #include <iostream>
 #include <thread>
+#include <vendor/ansi_colors.hpp>
+#include <vendor/testlib.hpp>
 #include <version.hpp>
 
 using namespace colors;

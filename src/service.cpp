@@ -38,8 +38,7 @@ namespace cryptor {
 
         // Mount point
         if (!svr.set_mount_point("/", config.base_dir)) {
-            spdlog::error("ERROR! The specified base directory {} doesn't exist...",
-                          config.base_dir);
+            spdlog::error("ERROR! The specified base directory {} doesn't exist...", config.base_dir);
             return false;
         }
 
