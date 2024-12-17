@@ -2,13 +2,11 @@
 // 2024-12-09 10:28:16 dpw
 //
 
-
 #include <spdlog/spdlog.h>
 
+#include <cli.hpp>
 #include <cxxopts.hpp>
 #include <iostream>
-
-#include <cli.hpp>
 #include <version.hpp>
 
 namespace cryptor {
@@ -100,4 +98,3 @@ namespace cryptor {
         return config;
     }
 }  // namespace cryptor
-

@@ -2,15 +2,13 @@
 // 2024-12-10 18:27:44 dpw
 //
 
-
 #include <httplib.h>
 #include <spdlog/spdlog.h>
 
 #include <cstdio>
 #include <iostream>
-
-#include <service.hpp>
 #include <logging.hpp>
+#include <service.hpp>
 
 using namespace httplib;
 
@@ -76,4 +74,3 @@ namespace cryptor {
         return svr.listen(config.host, config.port);
     }
 }  // namespace cryptor
-

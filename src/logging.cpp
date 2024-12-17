@@ -38,4 +38,3 @@ namespace cryptor {
     }
 
 }  // namespace cryptor
-
