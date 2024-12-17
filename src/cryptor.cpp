@@ -8,10 +8,21 @@
 #include <logging.hpp>
 #include <service.hpp>
 #include <version.hpp>
+#include <unit.hpp>
 
 int main(const int argc, char **argv) {
     using namespace httplib;
 
+    std::cout << argv[0] << std::endl;
+    const std::string ss = std::string(argv[0]);
+
+    // TODO remove 
+    // if (ss.find("/unit") != std::string::npos) {
+    if (ss.substr(ss.size() - 4) == "unit") {
+        int code = run_unit_tests(argc, argv);
+        return code;
+    }
+    
     const auto config = cryptor::parse_cli(argc, argv);
 
     std::string version = "Server Version: ";

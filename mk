@@ -23,10 +23,12 @@ do
         build)
             clear
 
+            # remove the old unit test
+            /bin/rm -f $root/build/unit
+
             cmake --build build/ 
             $root/build/cryptor --version
-            $root/build/unit
-
+            ln $root/build/cryptor $root/build/unit
 
             shift
         ;;
@@ -37,7 +39,7 @@ do
         ;;
         test)
             # TODO check that unit has been built and is newer that all the souces
-            $root/build/unit
+            # $root/build/unit
             $root/build/integration
             bat --paging=never $root/service.log
 
