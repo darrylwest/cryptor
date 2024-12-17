@@ -66,21 +66,26 @@ add_definitions(
     -DCPPHTTPLIB_BROTLI_SUPPORT
 )
 
-# Add executable targets
-add_executable(cryptor 
-    ${SRC_DIR}/cryptor.cpp
-    ${SRC_DIR}/logging.cpp
-    ${SRC_DIR}/service.cpp
-    ${SRC_DIR}/cli.cpp
-)
-add_executable(unit 
-    ${SRC_DIR}/unit.cpp
+# Add shared library target
+add_library(shared_objs OBJECT
     ${SRC_DIR}/logging.cpp
     ${SRC_DIR}/service.cpp
     ${SRC_DIR}/cli.cpp
 )
 
-add_executable(integration ${SRC_DIR}/integration.cpp)
+# Add executable targets
+add_executable(cryptor 
+    $<TARGET_OBJECTS:shared_objs>
+    ${SRC_DIR}/cryptor.cpp
+)
+add_executable(unit 
+    $<TARGET_OBJECTS:shared_objs>
+    ${SRC_DIR}/unit.cpp
+)
+add_executable(integration 
+    $<TARGET_OBJECTS:shared_objs>
+    ${SRC_DIR}/integration.cpp
+)
 
 # Link libraries to executables
 target_link_libraries(cryptor PRIVATE ${DEPENDENT_LIBRARIES})
