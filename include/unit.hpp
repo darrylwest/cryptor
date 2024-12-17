@@ -15,10 +15,10 @@ Results test_version() {
     Results r = {.name = "Version Tests"};
 
     auto vers = cryptor::Version();
-    r.equals(vers.major == 2024);
+    r.equals(vers.major == 24);
     r.equals(vers.minor == 12);
-    r.equals(vers.patch == 22);
-    r.equals(vers.build > 125);
+    r.equals(vers.patch == 17);
+    r.equals(vers.build > 128);
 
     return r;
 }
