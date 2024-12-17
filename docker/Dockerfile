@@ -8,7 +8,7 @@ LABEL maintainer="darryl.west" version="2024.12.15"
 RUN apt-get update && apt-get install -y \
     make binutils autoconf automake autotools-dev libtool pkg-config cmake \
     build-essential gcc g++ uuid-dev clang curl wget jq vim neovim git-core procps \
-    libcxxopts-dev libssl-dev libspdlog-dev zlib1g-dev libbrotli-dev brotli
+    libcxxopts-dev libssl-dev libspdlog-dev zlib1g-dev libbrotli-dev brotli libgtest-dev
 
 RUN useradd --create-home cryptor
 
