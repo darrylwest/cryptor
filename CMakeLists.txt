@@ -13,6 +13,12 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif()
 
+# Add the main include directory 
+include_directories(${CMAKE_SOURCE_DIR}/include) 
+
+# Add the vendor include directory 
+include_directories(SYSTEM ${CMAKE_SOURCE_DIR}/include/vendor)
+
 # Define source and include directories
 set(SRC_DIR "src")
 set(INCLUDE_DIR "include")
