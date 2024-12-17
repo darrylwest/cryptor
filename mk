@@ -23,10 +23,12 @@ do
         build)
             clear
 
+            # remove the old unit test
+            /bin/rm -f $root/build/unit
+
             cmake --build build/ 
             $root/build/cryptor --version
-            # $root/build/unit
-
+            ln $root/build/cryptor $root/build/unit
 
             shift
         ;;
