@@ -6,7 +6,7 @@
 #include <spdlog/spdlog.h>
 #include <unistd.h>
 
-#include <ansi_colors.hpp>
+#include <vendor/ansi_colors.hpp>
 #include <atomic>
 #include <cassert>
 #include <csignal>

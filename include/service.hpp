@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <httplib.h>
+#include <vendor/httplib.h>
 #include <spdlog/spdlog.h>
 
 #include <cstdio>
