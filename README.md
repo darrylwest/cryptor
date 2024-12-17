@@ -44,6 +44,7 @@ It's also possible to attach to the container, run the post-install script and m
 * [ ] openssl@3
 * [ ] cpp-httplib
 * [ ] clang-format (optional)
+* [ ] google test framework gtest
 
 ### Linux
 
@@ -53,6 +54,7 @@ It's also possible to attach to the container, run the post-install script and m
 * [ ] openssl@3
 * [ ] cpp-httplib
 * [ ] clang-format (optional)
+* [ ] google test framework gtest
 
 Here is an install script that should work on Debian 12 or Umbutu 22:
 
