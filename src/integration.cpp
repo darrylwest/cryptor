@@ -7,13 +7,14 @@
 #include <unistd.h>
 
 #include <vendor/ansi_colors.hpp>
+#include <vendor/testlib.hpp>
+
 #include <atomic>
 #include <cassert>
 #include <csignal>
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-#include <testlib.hpp>
 #include <thread>
 #include <version.hpp>
 
