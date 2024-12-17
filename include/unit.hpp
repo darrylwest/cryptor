@@ -2,12 +2,11 @@
 // 2024-12-10 18:27:44 dpw
 //
 
-#include <vendor/ansi_colors.hpp>
-#include <vendor/testlib.hpp>
-
 #include <cli.hpp>
 #include <logging.hpp>
 #include <service.hpp>
+#include <vendor/ansi_colors.hpp>
+#include <vendor/testlib.hpp>
 #include <version.hpp>
 
 // the actual tests

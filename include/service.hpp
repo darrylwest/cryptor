@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <vendor/httplib.h>
 #include <spdlog/spdlog.h>
+#include <vendor/httplib.h>
 
 #include <cstdio>
 #include <iostream>
