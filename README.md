@@ -23,6 +23,8 @@ Hosting the service on your private network also reduces the risk of phishing at
 
 You can preview the hosted web app [here](https://darrylwest.github.io/cryptor/).
 
+*NOTE:* _this app is changing rapidly and won't be stable until we come out of beta._
+
 ## Installation Instructions
 
 ### Docker
@@ -97,12 +99,12 @@ Or, like this: `./mk test`
 A list of issues is available in the crypto repo.  Feel free to add any issues you find, 
 or any suggestions for enhancements.
 
-## Contributing
-
-_TBD_
-
 ## Credits
 
-_TBD_
+Most of the logic for this app was based on a library under the 
+[MIT licensed](https://tlo.mit.edu/understand-ip/exploring-mit-open-source-license-comprehensive-guide) 
+called [portable-secret[https://github.com/mprimi/portable-secret] written by [Marco Primi](https://github.com/mprimi).
 
-###### 2024.12.16 | dpw
+The portable-secret library has a Copyright (c) 2022 Marco Primi.   Thanks for your great work Marco!
+
+###### 2024.12.17 | dpw
