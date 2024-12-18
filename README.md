@@ -103,7 +103,7 @@ or any suggestions for enhancements.
 
 Most of the logic for this app was based on a library under the 
 [MIT licensed](https://tlo.mit.edu/understand-ip/exploring-mit-open-source-license-comprehensive-guide) 
-called [portable-secret[https://github.com/mprimi/portable-secret] written by [Marco Primi](https://github.com/mprimi).
+called [portable-secret](https://github.com/mprimi/portable-secret) written by [Marco Primi](https://github.com/mprimi).
 
 The portable-secret library has a Copyright (c) 2022 Marco Primi.   Thanks for your great work Marco!
 
