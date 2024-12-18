@@ -4,6 +4,7 @@
 
 #include <httplib.h>
 #include <spdlog/spdlog.h>
+#include <spdlog/fmt/fmt.h>
 #include <unistd.h>
 
 #include <atomic>
@@ -22,21 +23,17 @@ using namespace colors;
 struct Config {
     std::string host = "localhost";
     std::string port = "22022";
+    std::string base_dir = "html/";
     bool start_server = true;
     std::string logfile = "service.log";
 };
 
 // Define the function to start the service
-void run_server(std::atomic<bool>& running, const Config& config) {
+void run_server(std::atomic<bool>& running, const Config& cfg) {
     running = true;
 
-    // Open a pipe to start the service
-    std::string cmd = "./build/cryptor --base html/";
-    cmd.append(" --host ");
-    cmd.append(config.host);
-    cmd.append(" --port ");
-    cmd.append(config.port);
-    cmd.append(" > " + config.logfile + " 2>&1 & echo $!");
+    auto cmd = fmt::format("./build/cryptor --base {} --host {} --port {} > {} ", cfg.base_dir, cfg.host, cfg.port, cfg.logfile);
+    cmd.append(" 2>&1 & echo $!");
 
     std::cout << cyan << "Server start command: " << yellow << cmd << reset << std::endl;
 
