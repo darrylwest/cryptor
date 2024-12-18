@@ -1,13 +1,13 @@
 ./build/cryptor
-[2024-12-18 08:06:50.328] [info] Server Version: 24.12.17.129
-[2024-12-18 08:06:50.330] [info] Server Config : host: localhost, port: 22022, base: html/, cert: ./.ssh/cert.pem, key : ./.ssh/key.pem, verbose: 1.
-[2024-12-18 08:06:50.333] [info] Server starting at https://localhost:22022
-[2024-12-18 08:06:50.433] [warning] Version Request: 24.12.17.129
-[2024-12-18 08:06:50.436] [info] GET HTTP/1.1 /version
-[2024-12-18 08:06:50.436] [info] Response status: 200
-[2024-12-18 08:06:50.544] [info] GET HTTP/1.1 /
-[2024-12-18 08:06:50.544] [info] Response status: 200
-[2024-12-18 08:06:50.652] [warning] Shutting down...
-[2024-12-18 08:06:50.653] [info] DELETE HTTP/1.1 /shutdown
-[2024-12-18 08:06:50.653] [info] Response status: 200
-[2024-12-18 08:06:50.754] [info] Server shutdown, code: true...
+[2024-12-18 16:14:40.320] [info] Server Version: 24.12.17.129
+[2024-12-18 16:14:40.320] [info] Server Config : host: localhost, port: 22022, base: html/, cert: ./.ssh/cert.pem, key : ./.ssh/key.pem, verbose: 1.
+[2024-12-18 16:14:40.323] [info] Server starting at https://localhost:22022
+[2024-12-18 16:14:40.453] [warning] Version Request: 24.12.17.129
+[2024-12-18 16:14:40.454] [info] GET HTTP/1.1 /version
+[2024-12-18 16:14:40.454] [info] Response status: 200
+[2024-12-18 16:14:40.626] [info] GET HTTP/1.1 /
+[2024-12-18 16:14:40.626] [info] Response status: 200
+[2024-12-18 16:14:40.786] [warning] Shutting down...
+[2024-12-18 16:14:40.787] [info] DELETE HTTP/1.1 /shutdown
+[2024-12-18 16:14:40.787] [info] Response status: 200
+[2024-12-18 16:14:40.888] [info] Server shutdown, code: true...
