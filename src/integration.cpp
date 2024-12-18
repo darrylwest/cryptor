@@ -23,11 +23,11 @@ struct Config {
     std::string host = "localhost";
     std::string port = "22022";
     bool start_server = true;
-    std::string logfile = "server.log";
+    std::string logfile = "service.log";
 };
 
 // Define the function to start the service
-void run_server(std::atomic<bool>& running, const Config &config) {
+void run_server(std::atomic<bool>& running, const Config& config) {
     running = true;
 
     // Open a pipe to start the service
@@ -78,7 +78,6 @@ int main(int argc, char* argv[]) {
 
     // start the server thread
     std::thread server_thread(run_server, std::ref(server_running), config);
-
 
     // Wait for the server to start
     auto loop_count = 20;

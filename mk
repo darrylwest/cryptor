@@ -65,7 +65,7 @@ do
             shift
         ;;
         clean)
-            /bin/rm -f $root/build/cryptor $root/build/unit
+            (cd build && make clean && /bin/rm -f unit)
         
             shift
         ;;
@@ -75,7 +75,7 @@ do
             shift
         ;;
         watch)
-            watchexec -c -w src/ -w include/ -e h,hpp,cpp ./mk build
+            watchexec -c -w src/ -w include/ -e h,hpp,cpp ./mk build test
 
             exit 0
         ;;
@@ -101,13 +101,14 @@ do
         help)
             echo "Targets:"
             echo ""
-            echo "   build    : compile and run cryptor and unit tests"
+            echo "   init     : run the cmake command to create the build folder"
+            echo "   build    : compile cryptor to the build folder"
             echo "   test     : run all tests"
             echo "   run      : runs the app and shows version"
             echo "   run-debug: runs the service with logging set to debug"
             echo "   format   : runs clang-format over includes and src"
             echo "   watch    : run watcher over source and include"
-            echo "   clean    : remove binary builds"
+            echo "   clean    : remove binary builds but leave the build folder"
             echo "   clobber  : remove the entire build folder"
             echo "   show     : runs curl against localhost to view index page"
             echo "   shutdown : runs localhost curl shutdown the server"
