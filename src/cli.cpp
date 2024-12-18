@@ -68,6 +68,7 @@ namespace cryptor {
 
             if (result.count("level")) {
                 auto level = result["level"].as<int>();
+                config.verbose = level;
                 switch (level) {
                     case 0:
                         spdlog::set_level(spdlog::level::debug);
@@ -85,6 +86,7 @@ namespace cryptor {
                         spdlog::set_level(spdlog::level::off);
                         break;
                     default:
+                        config.verbose = 1;
                         spdlog::set_level(spdlog::level::info);
                         break;
                 }

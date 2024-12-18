@@ -19,16 +19,26 @@
 
 using namespace colors;
 
-const std::string PORT = "22022";
+struct Config {
+    std::string host = "localhost";
+    std::string port = "22022";
+    bool start_server = true;
+    std::string logfile = "server.log";
+};
 
 // Define the function to start the service
-void run_server(std::atomic<bool>& running, const std::string& log_file) {
+void run_server(std::atomic<bool>& running, const Config &config) {
     running = true;
 
     // Open a pipe to start the service
-    std::string cmd = "./build/cryptor --base html/ --port ";
-    cmd.append(PORT);
-    cmd.append(" > " + log_file + " 2>&1 & echo $!");
+    std::string cmd = "./build/cryptor --base html/";
+    cmd.append(" --host ");
+    cmd.append(config.host);
+    cmd.append(" --port ");
+    cmd.append(config.port);
+    cmd.append(" > " + config.logfile + " 2>&1 & echo $!");
+
+    std::cout << cyan << "Server start command: " << yellow << cmd << reset << std::endl;
 
     FILE* pipe = popen(cmd.c_str(), "r");
     if (!pipe) {
@@ -57,15 +67,18 @@ void run_server(std::atomic<bool>& running, const std::string& log_file) {
 // if the service is not local (localhost or 127.0.0.1), then skip the startup
 int main(int argc, char* argv[]) {
     std::atomic<bool> server_running(false);
-    const std::string log_file = "service.log";
+    auto config = Config();
+
+    // TODO parse the cli to reconfig...
 
     std::string msg = "Cryptor Server Integration Tests, Version: ";
-    std::cout << cyan << msg << yellow << cryptor::Version() << reset << "\n" << std::endl;
+    std::cout << "\n" << cyan << msg << yellow << cryptor::Version() << reset << std::endl;
 
     rcstestlib::Results r = {.name = "Integration Test Summary"};
 
     // start the server thread
-    std::thread server_thread(run_server, std::ref(server_running), log_file);
+    std::thread server_thread(run_server, std::ref(server_running), config);
+
 
     // Wait for the server to start
     auto loop_count = 20;
@@ -76,8 +89,10 @@ int main(int argc, char* argv[]) {
 
     r.equals(server_running, "should be running in background thread now");
 
+    std::cout << std::endl;
+
     // Create a client for testing
-    httplib::Client cli("https://localhost:" + PORT);
+    httplib::Client cli("https://" + config.host + ":" + config.port);
     cli.enable_server_certificate_verification(false);
 
     // Test 1: Verify version endpoint
