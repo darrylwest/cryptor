@@ -10,6 +10,7 @@
 #include <version.hpp>
 
 // the actual tests
+using namespace rcstestlib;
 
 Results test_version() {
     Results r = {.name = "Version Tests"};

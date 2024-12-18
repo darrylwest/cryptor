@@ -1,11 +1,13 @@
 //
-// 2024-12-10 18:46:25 dpw:wq
+// 2024-12-10 18:46:25 dpw
 //
 
 #pragma once
 
 #include <ansi_colors.hpp>
 #include <iostream>
+
+namespace rcstestlib {
 
 using namespace colors;
 
@@ -64,3 +66,5 @@ struct Results {
         skipped += r.skipped;
     }
 };
+
+}

@@ -54,7 +54,7 @@ void run_server(std::atomic<bool>& running, const std::string& log_file) {
 }
 
 // use cxxopts to parse host and port
-// if the service is not local (localhost or 127.0.0.1), then skip the startup?
+// if the service is not local (localhost or 127.0.0.1), then skip the startup
 int main(int argc, char* argv[]) {
     std::atomic<bool> server_running(false);
     const std::string log_file = "service.log";
@@ -62,7 +62,7 @@ int main(int argc, char* argv[]) {
     std::string msg = "Cryptor Server Integration Tests, Version: ";
     std::cout << cyan << msg << yellow << cryptor::Version() << reset << "\n" << std::endl;
 
-    Results r = {.name = "Integration Test Summary"};
+    rcstestlib::Results r = {.name = "Integration Test Summary"};
 
     // start the server thread
     std::thread server_thread(run_server, std::ref(server_running), log_file);
