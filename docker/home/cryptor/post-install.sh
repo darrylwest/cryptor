@@ -15,6 +15,7 @@ cp  ~/.ssh/*.pem cryptor/cryptor/.ssh
     cargo install lsd
     cargo install ripgrep
     cargo install bat
+    cargo install watchexec-cli
 
     # don't these for c++ development...
     # cargo install just
