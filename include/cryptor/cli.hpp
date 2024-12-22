@@ -18,8 +18,8 @@ namespace cryptor {
         int port = 2022;
         std::string base_dir = "./";
         int verbose = 1;
-        std::string cert_file = "./.ssh/cert.pem";
-        std::string key_file = "./.ssh/key.pem";
+        std::string cert_file = "/.cryptor/cert.pem";
+        std::string key_file = "/.cryptor/key.pem";
 
         friend std::ostream& operator<<(std::ostream& os, const Config v) {
             // better to use <format> but it breaks on linux and fmt broken on darwin
@@ -41,4 +41,5 @@ namespace cryptor {
     };
 
     Config parse_cli(const int argc, char** argv);
+    bool ensureCertFiles(Config& config);
 }  // namespace cryptor

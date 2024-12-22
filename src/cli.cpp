@@ -8,13 +8,17 @@
 #include <cxxopts.hpp>
 #include <iostream>
 #include <cryptor/version.hpp>
+#include <filesystem>
+
 
 namespace cryptor {
+    namespace fs = std::filesystem;
 
     /*
      * parse the command line
      */
     Config parse_cli(const int argc, char** argv) {
+        bool skip_cert_check = false;
         auto config = Config();
 
         try {
@@ -59,10 +63,12 @@ namespace cryptor {
             }
 
             if (result.count("cert")) {
+                skip_cert_check = true;
                 config.cert_file = result["cert"].as<std::string>();
             }
 
             if (result.count("key")) {
+                skip_cert_check = true;
                 config.key_file = result["key"].as<std::string>();
             }
 
@@ -97,6 +103,52 @@ namespace cryptor {
             exit(1);
         }
 
+        if (!skip_cert_check) {
+            if (!ensureCertFiles(config)) {
+                std::cerr << "Failed to create cert/key in $HOME/.cryptor, bailing out." <<  std::endl;
+                exit(1);
+            }
+
+            spdlog::debug("config: {}", config.to_string());
+        }
+
         return config;
     }
+
+    // ensure the defaults are in place if the CLI doesn't specify
+    bool ensureCertFiles(Config& config) {
+        const char* home = std::getenv("HOME");
+
+        fs::path dir = fs::path(home) / ".cryptor";
+
+        if (!fs::exists(dir)) {
+            std::error_code ec;
+            if (!fs::create_directory(dir, ec)) {
+                std::cerr << "Failed to create folder " << dir << ", Error: " << ec.message() << std::endl;
+                exit(1);
+            }
+        }
+
+        fs::path cert = dir / "cert.pem";
+        fs::path key = dir / "key.pem";
+
+        if (!fs::exists(cert) || !fs::exists(key)) {
+            std::string cmd = "openssl req -x509 -newkey rsa:4096 -nodes -keyout ";
+            cmd.append(key.c_str());
+            cmd.append(" -out ");
+            cmd.append(cert.c_str());
+            cmd.append(" -days 365 -subj \"");
+            cmd.append("/C=US/ST=California/L=Berkeley/O=RainCitySoftware");
+            cmd.append("/CN=raincitysoftware.com\"");
+
+            // std::cout << "run this: " << cmd << std::endl;
+            std::system(cmd.c_str());
+        }
+
+        config.cert_file = cert.c_str();
+        config.key_file = key.c_str();
+
+        return true;
+    }
+
 }  // namespace cryptor
