@@ -10,7 +10,7 @@
 #include <cstdio>
 #include <iostream>
 
-#include "cli.hpp"
+#include <cryptor/cli.hpp>
 
 namespace cryptor {
 

@@ -4,11 +4,11 @@
 
 #include <spdlog/spdlog.h>
 
-#include <cli.hpp>
-#include <logging.hpp>
-#include <service.hpp>
-#include <unit.hpp>
-#include <version.hpp>
+#include <cryptor/cli.hpp>
+#include <cryptor/logging.hpp>
+#include <cryptor/service.hpp>
+#include <cryptor/unit.hpp>
+#include <cryptor/version.hpp>
 
 int main(const int argc, char **argv) {
     using namespace httplib;

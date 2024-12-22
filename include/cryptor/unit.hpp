@@ -2,12 +2,12 @@
 // 2024-12-10 18:27:44 dpw
 //
 
-#include <cli.hpp>
-#include <logging.hpp>
-#include <service.hpp>
+#include <cryptor/cli.hpp>
+#include <cryptor/logging.hpp>
+#include <cryptor/service.hpp>
 #include <vendor/ansi_colors.hpp>
 #include <vendor/testlib.hpp>
-#include <version.hpp>
+#include <cryptor/version.hpp>
 
 // the actual tests
 using namespace rcstestlib;
@@ -18,8 +18,8 @@ Results test_version() {
     auto vers = cryptor::Version();
     r.equals(vers.major == 24);
     r.equals(vers.minor == 12);
-    r.equals(vers.patch == 17);
-    r.equals(vers.build > 128);
+    r.equals(vers.patch == 22);
+    r.equals(vers.build > 129);
 
     return r;
 }

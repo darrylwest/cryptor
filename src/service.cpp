@@ -7,8 +7,8 @@
 
 #include <cstdio>
 #include <iostream>
-#include <logging.hpp>
-#include <service.hpp>
+#include <cryptor/logging.hpp>
+#include <cryptor/service.hpp>
 
 using namespace httplib;
 

@@ -4,10 +4,10 @@
 
 #include <spdlog/spdlog.h>
 
-#include <cli.hpp>
+#include <cryptor/cli.hpp>
 #include <cxxopts.hpp>
 #include <iostream>
-#include <version.hpp>
+#include <cryptor/version.hpp>
 
 namespace cryptor {
 
