@@ -86,6 +86,11 @@ do
             shift
         ;;
 
+        pull)
+            git pull
+
+            shift
+        ;;
         page)
             curl -k https://localhost:$port
 
@@ -108,6 +113,7 @@ do
             echo "   run-debug: runs the service with logging set to debug"
             echo "   format   : runs clang-format over includes and src"
             echo "   watch    : run watcher over source and include"
+            echo "   pull     : pull the latest repo changes"
             echo "   clean    : remove binary builds but leave the build folder"
             echo "   clobber  : remove the entire build folder"
             echo "   show     : runs curl against localhost to view index page"
