@@ -88,7 +88,7 @@ target_link_libraries(cryptor PRIVATE ${DEPENDENT_LIBRARIES})
 target_link_libraries(integration PRIVATE ${DEPENDENT_LIBRARIES})
 
 # Installation rules
-install(TARGETS cryptor integration DESTINATION ${BIN_DIR})
+install(TARGETS cryptor DESTINATION /usr/local/bin)
 
 # Static linking for standalone executable
 if(NOT APPLE)
