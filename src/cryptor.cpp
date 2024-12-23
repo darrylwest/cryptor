@@ -3,7 +3,9 @@
 //
 
 #include <spdlog/spdlog.h>
+#include <spdlog/fmt/fmt.h>
 
+#include <vendor/ansi_colors.hpp>
 #include <cryptor/cli.hpp>
 #include <cryptor/logging.hpp>
 #include <cryptor/service.hpp>
@@ -13,7 +15,7 @@
 int main(const int argc, char **argv) {
     using namespace httplib;
 
-    std::cout << argv[0] << std::endl;
+    fmt::print("{}{}{}\n", colors::yellow, argv[0], colors::reset);
     const std::string ss = std::string(argv[0]);
 
     // run the unit tests
@@ -24,13 +26,9 @@ int main(const int argc, char **argv) {
 
     const auto config = cryptor::parse_cli(argc, argv);
 
-    std::string version = "Server Version: ";
-    auto vers = cryptor::Version();
-
-    version.append(vers.to_string());
-
     if (config.verbose > 0) {
-        spdlog::info("{}", version);
+        auto vers = cryptor::Version().to_string();
+        spdlog::info("Server Version: {}{}{}", colors::cyan, vers, colors::reset);
         spdlog::info("Server Config : {}", config.to_string());
     }
 
