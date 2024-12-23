@@ -99,13 +99,13 @@ namespace cryptor {
             }
 
         } catch (const std::exception& exp) {
-            std::cout << "error parsing cli options: " << exp.what() << std::endl;
+            spdlog::error("Error parsing cli options: {}", exp.what());
             exit(1);
         }
 
         if (!skip_cert_check) {
             if (!ensureCertFiles(config)) {
-                std::cerr << "Failed to create cert/key in $HOME/.cryptor, bailing out." <<  std::endl;
+                spdlog::error("Failed to create cert/key in $HOME/.cryptor, bailing out.");
                 exit(1);
             }
 
@@ -124,7 +124,7 @@ namespace cryptor {
         if (!fs::exists(dir)) {
             std::error_code ec;
             if (!fs::create_directory(dir, ec)) {
-                std::cerr << "Failed to create folder " << dir << ", Error: " << ec.message() << std::endl;
+                spdlog::error("Failed to create folder: {}, Error: {}", dir.c_str(), ec.message());
                 exit(1);
             }
         }
@@ -144,7 +144,7 @@ namespace cryptor {
             // std::cout << "run this: " << cmd << std::endl;
             int code = std::system(cmd.c_str());
             if (code != 0) {
-                std::cerr << "Failed to create pem files. Consider creating them and place them in " << dir.c_str() << std::endl;
+                spdlog::error("Failed to create pem files. Consider creating them and place them in {}", dir.c_str());
                 exit(1);
             }
         }
