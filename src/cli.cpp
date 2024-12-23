@@ -142,7 +142,11 @@ namespace cryptor {
             cmd.append("/CN=raincitysoftware.com\"");
 
             // std::cout << "run this: " << cmd << std::endl;
-            std::system(cmd.c_str());
+            int code = std::system(cmd.c_str());
+            if (code != 0) {
+                std::cerr << "Failed to create pem files. Consider creating them and place them in " << dir.c_str() << std::endl;
+                exit(1);
+            }
         }
 
         config.cert_file = cert.c_str();

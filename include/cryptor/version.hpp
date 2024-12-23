@@ -20,7 +20,7 @@ namespace cryptor {
         int major = 24;
         int minor = 12;
         int patch = 22;
-        int build = 130;
+        int build = 131;
 
         friend std::ostream& operator<<(std::ostream& os, const Version v) {
             // better to use <format> but it breaks on linux and fmt broken on darwin
