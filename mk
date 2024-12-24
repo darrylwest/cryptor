@@ -26,7 +26,8 @@ do
             # remove the old unit test
             /bin/rm -f $root/build/unit
 
-            cmake --build build/ 
+            # cmake --build build/ 
+            (cd build && make -j4)
             $root/build/cryptor --version
 
             ln $root/build/cryptor $root/build/unit
