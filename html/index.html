@@ -44,6 +44,17 @@
         a.download_link {
             font-size: xx-large;
         }
+
+        span.title_name {
+            font-size: 40px;
+            font-weight: bold;
+            margin-right: 40px;
+        }
+
+        span.title_help {
+            font-size: medium;
+            text-align: right;
+        }
     </style>
     <script src="version.js"></script>
     <script>
@@ -332,8 +343,12 @@
 </head>
 
 <body onload="init()">
-    <h2>Cryptor</h2>
+    <div>
+        <span class="title_name">Cryptor</span>
+        <span class="title_help"><span><a href="https://darrylwest.github.io/cryptor/help.html">Help</a></span>
+    </div>
     <!-- Inputs -->
+
     <div style="display: none;">
         Salt: 0x
         <input type="text" id="salt" size="33" value="❓" required>
@@ -373,7 +388,7 @@
     <!-- the password -->
     <div>
         <h4>Enter your pass-phrase for this message... <h4>
-        <input type="text" id="password" placeholder="Enter your pass-phrase (password) here." size="60" value="" minlength="8" required>
+        <input type="text" id="password" placeholder="Enter your pass-phrase (password) here" size="60" value="" minlength="8" required>
     </div>
     <div style="display: none;">
         Password hint:<br>
